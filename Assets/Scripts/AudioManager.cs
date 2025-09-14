@@ -125,12 +125,6 @@ public class AudioManager : MonoBehaviour
 
     //==================== Interaction ====================
 
-    public void PlaySelectClip()
-    {
-        sfxSource.clip = selectClip;
-        sfxSource.Play();
-    }
-
     public void PlaySfxWithPitchShifting(List<AudioClip> clips, float minPitch = 0.8f, float maxPitch = 1.2f)
     {
         if (sfxSource == null || clips == null || clips.Count == 0)
