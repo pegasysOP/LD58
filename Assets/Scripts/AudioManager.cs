@@ -98,31 +98,6 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    //==================== UI ====================
-    public void PlayButtonPressedClip()
-    {
-        sfxSource.clip = buttonPressClip;
-        sfxSource.Play();
-    }
-
-    public void PlayButtonHoverClip()
-    {
-        sfxSource.clip = buttonHoverClip;
-        sfxSource.Play();
-    }
-
-    public void PauseMenuOpenClip()
-    {
-        sfxSource.clip = pauseMenuOpenClip;
-        sfxSource.Play();
-    }
-
-    public void PauseMenuClosedClip()
-    {
-        sfxSource.clip = pauseMenuClosedClip;
-        sfxSource.Play();
-    }
-
     //==================== Interaction ====================
 
     public void PlaySfxWithPitchShifting(List<AudioClip> clips, float minPitch = 0.8f, float maxPitch = 1.2f)
