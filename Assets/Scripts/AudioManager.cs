@@ -16,14 +16,14 @@ public class AudioManager : MonoBehaviour
     public AudioClip pauseMenuOpenClip;
     public AudioClip pauseMenuClosedClip;
 
-    [Header("Interaction Sounds")]
+    [Header("Interaction")]
     public AudioClip selectClip;
-
-    [Header("Voice Lines")]
-    public AudioClip correctDoorClip;
+    public AudioClip selectBlockedClip;
 
     [Header("Music")]
     public AudioClip menuMusicClip;
+    public AudioClip gameWonClip;
+    public AudioClip gameLostClip;
 
     public static AudioManager Instance;
 
@@ -46,6 +46,11 @@ public class AudioManager : MonoBehaviour
     public void PlayMusic(AudioClip clip, FadeType fadeType = FadeType.None, float fadeTime = 2f, bool isDucking = false)
     {
         Play(musicSource, clip, fadeType, fadeTime, isDucking);
+    }
+
+    public void PlaySfx(List<AudioClip> audioClips)
+    {
+        PlaySfxWithPitchShifting(audioClips, 1.0f, 1.0f);
     }
 
     public void Play(AudioSource source, AudioClip clip, FadeType fadeType = FadeType.None, float fadeTime = 2f, bool isDucking = false)
@@ -137,13 +142,7 @@ public class AudioManager : MonoBehaviour
         sfxSource.PlayOneShot(sfxSource.clip);
     }
 
-    public void PlayCorrectDoorClip()
-    {
-        sfxSource.clip = correctDoorClip;
-        sfxSource.Play();
-    }
-
-    //==================== Music ====================
+    //==================== Volume ====================
 
     public void UpdateVolume(float value)
     {
@@ -151,6 +150,8 @@ public class AudioManager : MonoBehaviour
         fadeSource.volume = value / 3;
         sfxSource.volume = value / 3;
     }
+
+    //==================== Ducking ====================
 
     private void StartDuckAudio(AudioSource sourceToDuck, float duckVolumePercent = 0.3f, float duckDuration = 2f, float fadeTime = 0.5f)
     {
