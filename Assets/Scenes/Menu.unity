@@ -642,6 +642,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4993552574586516485, guid: 919727178eedcf144a0ddc19c34044b3, type: 3}
+      propertyPath: m_text
+      value: Shore Things
+      objectReference: {fileID: 0}
     - target: {fileID: 6862794825143585560, guid: 919727178eedcf144a0ddc19c34044b3, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
