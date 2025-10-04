@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Net.Http;
 using UnityEngine;
-using static Unity.VisualScripting.Member;
 
 public class AudioManager : MonoBehaviour
 {
@@ -24,6 +22,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip menuMusicClip;
     public AudioClip gameWonClip;
     public AudioClip gameLostClip;
+    public AudioClip hawiiSongClip;
 
     public static AudioManager Instance;
 
