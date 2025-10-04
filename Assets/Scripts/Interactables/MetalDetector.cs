@@ -3,8 +3,10 @@ using UnityEngine.InputSystem;
 
 public class MetalDetector : MonoBehaviour
 {
-    float range = 2f;
+    public float range = 2f;
     float battery = 100f;
+    public float maxBattery = 100f;
+    public float dischargeRate = 10f;
     private Mouse mouse;
 
     public LayerMask metalDetectionMask;
@@ -22,10 +24,17 @@ public class MetalDetector : MonoBehaviour
 
     public void Detect()
     {
+        battery -= dischargeRate * Time.deltaTime;
+
+        if (battery < 0)
+        {
+            return;
+        }
+
         Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, range, metalDetectionMask);
         foreach (var hitCollider in hitColliders)
         {
-            Debug.Log("Hit " + hitCollider.name);
+            Debug.Log("Battery: " + battery);
         } 
     }
 }
