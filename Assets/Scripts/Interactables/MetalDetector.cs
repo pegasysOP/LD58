@@ -20,7 +20,9 @@ public class MetalDetector : MonoBehaviour
     public AudioClip metalDetectorBeep;
     public float minPitch = 0.8f;
     public float maxPitch = 2.0f;
-    public float beepInterval = 0.1f;
+    private float minBeepInterval = 0.2f;
+    private float maxBeepInterval = 0.5f;
+    private float beepInterval = 0.5f;
 
     private float beepTimer = 0f;
     private Mouse mouse;
@@ -89,6 +91,8 @@ public class MetalDetector : MonoBehaviour
             .Min();
 
         float proximity = Mathf.Clamp01(1f - (closestDistance / range));
+        beepInterval = Mathf.Lerp(maxBeepInterval, minBeepInterval, proximity);
+        Debug.Log(beepInterval);
 
         beepTimer += Time.deltaTime;
 
