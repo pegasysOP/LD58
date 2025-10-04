@@ -53,8 +53,8 @@ public class Spawner : MonoBehaviour
         if (hitInfo.collider != null)
             spawnPosition.y = hitInfo.point.y;
 
-        // TODO: go under ground in future
-        spawnPosition.y -= 0.45f;
+        // go under ground 
+        spawnPosition.y -= 1f;
 
         Item chosenItem = GetItemToSpawn();
         ItemObject spawnedItem = Instantiate(chosenItem.objectPrefab, spawnPosition, Quaternion.identity);
