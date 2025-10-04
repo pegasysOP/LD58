@@ -2,7 +2,8 @@ using UnityEngine;
 
 public interface IInteractable
 {
-    float rangeMultipler { get; set; }
+    float RangeMultipler { get; set; }
+    int Value { get; set; }
 
     public void OnInteract();
 }
