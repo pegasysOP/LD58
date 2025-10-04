@@ -44,12 +44,15 @@ public class Spawner : MonoBehaviour
         // TODO: go under ground in future
         spawnPosition.y -= 0.45f;
 
-        GameObject spawnedItem = Instantiate(GetItemToSpawn(), spawnPosition, Quaternion.identity);
-        spawnedItem.transform.SetParent(this.transform);
-        spawnedItems.Add(spawnedItem);
+        Item chosenItem = GetItemToSpawn();
+        ItemObject spawnedItem = Instantiate(chosenItem.objectPrefab, spawnPosition, Quaternion.identity);
+        spawnedItem.transform.SetParent(transform);
+        spawnedItem.Init(chosenItem);
+
+        spawnedItems.Add(spawnedItem.gameObject);
     }
 
-    private GameObject GetItemToSpawn()
+    private Item GetItemToSpawn()
     {
         float totalWeight = 0f;
         foreach (Item item in items)
@@ -62,10 +65,21 @@ public class Spawner : MonoBehaviour
         {
             currentWeight += 1f / item.rarity;
             if (randomPoint <= currentWeight)
-                return item.itemPrefab;
+                return item;
         }
 
         // fallback
-        return items[0].itemPrefab;
+        return items[0];
+    }
+
+    private void ResetSpawns()
+    {
+        foreach (GameObject spawnedItem in spawnedItems)
+            Destroy(spawnedItem);
+
+        spawnedItems.Clear();
+
+        for (int i = 0; i < maxItems; i++)
+            SpawnItem();
     }
 }

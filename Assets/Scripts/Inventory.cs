@@ -4,23 +4,12 @@ using System.Collections.Generic;
 
 public class Inventory : MonoBehaviour
 {
-    List<Interactable> items;
+    List<ItemData> items = new List<ItemData>();
     public int maxSize = 2;
     private float money = 0f;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        items = new List<Interactable>();
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public bool AddItem(Interactable item)
+    public bool AddItem(ItemData item)
     {
         if(items.Count < maxSize)
         {
@@ -34,7 +23,7 @@ public class Inventory : MonoBehaviour
     {
         if (items.Count > 0)
         {
-            Interactable item = items[0];
+            ItemData item = items[0];
             items.RemoveAt(0);
             money += item.Value;
             Debug.Log(money);
@@ -48,7 +37,7 @@ public class Inventory : MonoBehaviour
         maxSize += increment;
     }
 
-    public Interactable GetItem(int index)
+    public ItemData GetItem(int index)
     {
         return items[index];
     }
