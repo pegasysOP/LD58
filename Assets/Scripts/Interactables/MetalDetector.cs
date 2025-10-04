@@ -75,7 +75,7 @@ public class MetalDetector : MonoBehaviour
         {
             Vector3 directionToTarget = (hit.transform.position - transform.position).normalized;
             float angle = Vector3.Angle(forward, directionToTarget);
-            return angle <= maxAngle;
+            return angle <= maxAngle || Vector3.Distance(transform.position, hit.transform.position) < 0.5f;
         })
         .ToList();
 
