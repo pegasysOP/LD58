@@ -32,6 +32,12 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.Instance.LOCKED)
+        {
+            inputDir = Vector3.zero;
+            return;
+        }
+
         if (keyboard != null && keyboard.spaceKey.wasPressedThisFrame && groundDetector.IsGrounded)
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
 

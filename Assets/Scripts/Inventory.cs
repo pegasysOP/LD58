@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using UnityEngine;
 using System.Collections.Generic;
+using static UnityEditor.Progress;
 
 public class Inventory : MonoBehaviour
 {
@@ -19,17 +20,35 @@ public class Inventory : MonoBehaviour
         return false;
     }
 
-    public bool RemoveItem()
+    // cursed method, do not use
+    //public bool RemoveItem()
+    //{
+    //    if (items.Count > 0)
+    //    {
+    //        ItemData item = items[0];
+    //        items.RemoveAt(0);
+    //
+    //        money += item.Value;
+    //        GameManager.Instance.hudController.UpdateMoneyText(money);
+    //
+    //        return true;
+    //    }
+    //
+    //    return false;
+    //}
+
+    public float SellAll()
     {
-        if (items.Count > 0)
-        {
-            ItemData item = items[0];
-            items.RemoveAt(0);
-            money += item.Value;
-            Debug.Log(money);
-            return true;
-        }
-        return false;
+        float gains = 0f;
+
+        foreach (ItemData item in items)
+            gains += item.Value;
+        items.Clear();
+
+        money += gains;
+        GameManager.Instance.hudController.UpdateMoneyText(money);
+
+        return gains;
     }
 
     public void IncreaseInventoryCapacity(int increment = 1)
@@ -55,10 +74,11 @@ public class Inventory : MonoBehaviour
     public void DeductMoney(float cost)
     {
         if(money - cost < 0f)
-        {
             Debug.LogError("Trying to set negative amount.");
-        }
+
         this.money -= cost;
+
+        GameManager.Instance.hudController.UpdateMoneyText(money);
     }
 
 }

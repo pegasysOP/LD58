@@ -7,7 +7,7 @@ public class Radio : MonoBehaviour
     void Start()
     {
         audioManager = FindFirstObjectByType<AudioManager>();
-        audioManager.PlayMusic(audioManager.hawiiSongClip, AudioManager.FadeType.FadeIn);
+        audioManager.PlayMusic(audioManager.hawiiSongClip, AudioManager.FadeType.None);
     }
 
     // Update is called once per frame

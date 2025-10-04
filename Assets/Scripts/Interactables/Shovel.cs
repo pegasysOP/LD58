@@ -16,6 +16,9 @@ public class Shovel : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.Instance.LOCKED)
+            return;
+
         if (mouse.leftButton.wasPressedThisFrame)
             Dig();
     }

@@ -23,7 +23,18 @@ public class Spawner : MonoBehaviour
 
     public void TrySpawnItem()
     {
+        // dont exceed max
         if (spawnedItems.Count >= maxItems)
+            return;
+
+        // dont spawn if player is close
+        if (Vector3.Distance(transform.position, GameManager.Instance.playerController.transform.position) < 5f)
+            return;
+
+        // dont spawn if player is facing
+        Vector3 toPlayer = transform.position - GameManager.Instance.playerController.transform.position;
+        Vector3 playerFace = GameManager.Instance.playerController.transform.forward;
+        if (Vector3.Angle(toPlayer, playerFace) < GameManager.Instance.metalDetector.maxAngle)
             return;
 
         SpawnItem();
@@ -31,6 +42,7 @@ public class Spawner : MonoBehaviour
 
     private void SpawnItem()
     {
+        //TODO: Spawn if player is out of range OR not facing 
         Vector3 spawnPosition = new Vector3(
         Random.Range(spawnerArea.bounds.min.x, spawnerArea.bounds.max.x),
         spawnerArea.bounds.max.y, //start at top

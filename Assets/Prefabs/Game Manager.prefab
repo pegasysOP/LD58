@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8604299526140403365}
   - component: {fileID: 5786254294602685839}
   - component: {fileID: 6189494663581875946}
+  - component: {fileID: 2105909116531319252}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -49,6 +50,7 @@ MonoBehaviour:
   audioManager: {fileID: 5786254294602685839}
   playerController: {fileID: 0}
   cameraController: {fileID: 0}
+  hudController: {fileID: 0}
 --- !u!114 &5786254294602685839
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -171,3 +173,15 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2105909116531319252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5500071337967560426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4fb1851f73d6854084eca2cebb191cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SettingsUtils

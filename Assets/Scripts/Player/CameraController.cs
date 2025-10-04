@@ -10,7 +10,6 @@ public class CameraController : MonoBehaviour
     public float maxLookAngle;
 
     private float sensitivitySetting = 1f;
-    private bool locked = false;
     private Mouse mouse;
 
     private void Awake()
@@ -29,7 +28,7 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
-        if (locked || mouse == null)
+        if (GameManager.Instance.LOCKED)
             return;
 
         Vector2 mouseDelta = mouse.delta.ReadValue() * 0.02f; // Scale down to match old Input.GetAxis values
@@ -45,10 +44,5 @@ public class CameraController : MonoBehaviour
     public void UpdateSensitivity(float value)
     {
         sensitivitySetting = value;
-    }
-
-    public void SetLocked(bool locked)
-    {
-        this.locked = locked;
     }
 }
