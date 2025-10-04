@@ -71,8 +71,11 @@ public class Inventory : MonoBehaviour
 
     public void DeductMoney(float cost)
     {
-        if(money - cost < 0f)
-            Debug.LogError("Trying to set negative amount.");
+        if (money - cost < 0f)
+        {
+            Debug.LogWarning("Trying to set negative amount.");
+            return;
+        }
 
         this.money -= cost;
 
