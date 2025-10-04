@@ -1,40 +1,83 @@
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(AudioSource))]
 public class MetalDetector : MonoBehaviour
 {
+    [Header("Detection Settings")]
     public float range = 2f;
-    float battery = 100f;
+    public LayerMask metalDetectionMask;
+
+    [Header("Battery Settings")]
     public float maxBattery = 100f;
     public float dischargeRate = 10f;
-    private Mouse mouse;
+    private float battery;
 
-    public LayerMask metalDetectionMask;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [Header("Audio Settings")]
+    public AudioClip metalDetectorBeep;
+    public float minPitch = 0.8f;
+    public float maxPitch = 2.0f;
+    public float beepInterval = 0.1f;
+
+    private float beepTimer = 0f;
+    private Mouse mouse;
+    private AudioSource audioSource;
+
     void Start()
     {
         mouse = Mouse.current;
+        audioSource = GetComponent<AudioSource>();
+        audioSource.playOnAwake = false;
+        audioSource.clip = metalDetectorBeep;
+        battery = maxBattery;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (mouse.rightButton.isPressed) Detect();
+        if (mouse.rightButton.isPressed)
+        {
+            Detect();
+        }
+        else
+        {
+            beepTimer = 0f;
+        }
     }
 
     public void Detect()
     {
         battery -= dischargeRate * Time.deltaTime;
+        if (battery <= 0f) return;
 
-        if (battery < 0)
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, range, metalDetectionMask);
+        if (hitColliders.Length == 0)
         {
+            beepTimer = 0f;
             return;
         }
 
-        Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, range, metalDetectionMask);
-        foreach (var hitCollider in hitColliders)
+        float closestDistance = hitColliders
+            .Select(hit => Vector3.Distance(transform.position, hit.transform.position))
+            .Min();
+
+        float proximity = Mathf.Clamp01(1f - (closestDistance / range));
+
+        beepTimer += Time.deltaTime;
+
+        if (beepTimer >= beepInterval)
         {
-            Debug.Log("Battery: " + battery);
-        } 
+            PlayBeep(proximity);
+            beepTimer = 0f;
+        }
+    }
+
+    void PlayBeep(float proximity)
+    {
+        if (audioSource == null || metalDetectorBeep == null)
+            return;
+
+        audioSource.pitch = Mathf.Lerp(minPitch, maxPitch, proximity);
+        audioSource.PlayOneShot(metalDetectorBeep);
     }
 }
