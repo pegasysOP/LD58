@@ -313,10 +313,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Spawner
   spawnerArea: {fileID: 449573830}
-  placeholderItem: {fileID: 2065652020649575063, guid: 26467fe6695b8664f992553e8b779b26, type: 3}
   groundLayer:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 0
+  maxItems: 5
   items:
   - {fileID: 11400000, guid: c7451c760802bcb46adb9ff3331256c8, type: 2}
   - {fileID: 11400000, guid: b106c184cf2d5884a8733d7362207611, type: 2}
@@ -381,7 +381,7 @@ GameObject:
   - component: {fileID: 942560014}
   - component: {fileID: 942560013}
   - component: {fileID: 942560012}
-  m_Layer: 12
+  m_Layer: 11
   m_Name: Ground (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -493,7 +493,7 @@ GameObject:
   - component: {fileID: 1225118377}
   - component: {fileID: 1225118376}
   - component: {fileID: 1225118375}
-  m_Layer: 12
+  m_Layer: 11
   m_Name: Ground (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -706,7 +706,7 @@ GameObject:
   - component: {fileID: 1742236964}
   - component: {fileID: 1742236963}
   - component: {fileID: 1742236962}
-  m_Layer: 12
+  m_Layer: 11
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
