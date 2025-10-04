@@ -315,7 +315,7 @@ MonoBehaviour:
   spawnerArea: {fileID: 449573830}
   groundLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2048
   maxItems: 5
   items:
   - {fileID: 11400000, guid: c7451c760802bcb46adb9ff3331256c8, type: 2}
