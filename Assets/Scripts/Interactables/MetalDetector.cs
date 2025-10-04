@@ -57,6 +57,7 @@ public class MetalDetector : MonoBehaviour
             return;
         }
 
+        //TODO: Base this on direction too. I.e. only detect within a 45/90 degree angle or something.
         float closestDistance = hitColliders
             .Select(hit => Vector3.Distance(transform.position, hit.transform.position))
             .Min();

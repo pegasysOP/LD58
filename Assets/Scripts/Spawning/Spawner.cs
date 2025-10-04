@@ -31,6 +31,7 @@ public class Spawner : MonoBehaviour
 
     private void SpawnItem()
     {
+        //TODO: Spawn if player is out of range OR not facing 
         Vector3 spawnPosition = new Vector3(
         Random.Range(spawnerArea.bounds.min.x, spawnerArea.bounds.max.x),
         spawnerArea.bounds.max.y, //start at top
