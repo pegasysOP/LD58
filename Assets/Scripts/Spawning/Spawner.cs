@@ -28,10 +28,14 @@ public class Spawner : MonoBehaviour
             return;
 
         // dont spawn if player is close
-        if (Vector3.Distance(transform.position, GameManager.Instance.playerController.transform.position) < 10f)
+        if (Vector3.Distance(transform.position, GameManager.Instance.playerController.transform.position) < 5f)
             return;
 
-        // TODO: dont spawn if player is facing
+        // dont spawn if player is facing
+        Vector3 toPlayer = transform.position - GameManager.Instance.playerController.transform.position;
+        Vector3 playerFace = GameManager.Instance.playerController.transform.forward;
+        if (Vector3.Angle(toPlayer, playerFace) < GameManager.Instance.metalDetector.maxAngle)
+            return;
 
         SpawnItem();
     }
