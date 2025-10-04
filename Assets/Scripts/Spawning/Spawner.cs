@@ -23,8 +23,15 @@ public class Spawner : MonoBehaviour
 
     public void TrySpawnItem()
     {
+        // dont exceed max
         if (spawnedItems.Count >= maxItems)
             return;
+
+        // dont spawn if player is close
+        if (Vector3.Distance(transform.position, GameManager.Instance.playerController.transform.position) < 10f)
+            return;
+
+        // TODO: dont spawn if player is facing
 
         SpawnItem();
     }

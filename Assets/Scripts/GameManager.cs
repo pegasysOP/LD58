@@ -10,6 +10,10 @@ public class GameManager : MonoBehaviour
     public CameraController cameraController;
     public HudController hudController;
 
+    public Inventory inventory;
+    public MetalDetector metalDetector;
+    public Upgrades upgrades;
+
     private void Awake()
     {
         if (Instance == null)
@@ -23,6 +27,10 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         audioManager.Init();
+
+        inventory = FindFirstObjectByType<Inventory>();
+        metalDetector = FindFirstObjectByType<MetalDetector>();
+        upgrades = FindFirstObjectByType<Upgrades>();
     }
     public void DestroySelf()
     {
