@@ -44,6 +44,10 @@ public class Inventory : MonoBehaviour
         items.Clear();
 
         money += gains;
+        if(gains > 0f)
+        {
+            AudioManager.Instance.PlaySfx(AudioManager.Instance.coinClips);
+        }
         GameManager.Instance.hudController.UpdateMoneyText(money);
 
         return gains;

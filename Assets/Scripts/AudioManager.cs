@@ -16,7 +16,7 @@ public class AudioManager : MonoBehaviour
 
     [Header("SFX")]
     public AudioClip waveClip;
-    public AudioClip[] coinClips;
+    public List<AudioClip> coinClips;
     public List<AudioClip> digSandClips;
 
     [Header("Interaction")]
