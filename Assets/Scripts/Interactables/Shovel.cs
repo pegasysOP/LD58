@@ -17,7 +17,7 @@ public class Shovel : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (mouse.leftButton.isPressed) Dig();
+        if (mouse.leftButton.wasPressedThisFrame) Dig();
     }
 
     public void Dig()
