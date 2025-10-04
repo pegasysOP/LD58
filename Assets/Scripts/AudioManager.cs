@@ -14,6 +14,9 @@ public class AudioManager : MonoBehaviour
     public AudioClip pauseMenuOpenClip;
     public AudioClip pauseMenuClosedClip;
 
+    [Header("SFX")]
+    public AudioClip waveClip;
+
     [Header("Interaction")]
     public AudioClip selectClip;
     public AudioClip selectBlockedClip;
@@ -23,6 +26,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip gameWonClip;
     public AudioClip gameLostClip;
     public AudioClip hawiiSongClip;
+    public AudioClip jazzSongClip;
 
     public static AudioManager Instance;
 
@@ -37,6 +41,7 @@ public class AudioManager : MonoBehaviour
     {
         Instance = this;
         UpdateVolume(SettingsUtils.GetMasterVolume());
+        Play(sfxSource, waveClip);
     }
 
     //==================== Utility ====================
