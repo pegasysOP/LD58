@@ -3,11 +3,15 @@ using UnityEngine.InputSystem;
 
 public class Shovel : MonoBehaviour
 {
+    float range = 2f;
     private Mouse mouse;
+    public LayerMask shovelMask;
+    private Inventory inventory;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         mouse = Mouse.current;
+        inventory = FindFirstObjectByType<Inventory>();
     }
 
     // Update is called once per frame
@@ -18,6 +22,10 @@ public class Shovel : MonoBehaviour
 
     public void Dig()
     {
-        Debug.Log("Digging! Diggy diggy hole!");
+        Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, range, shovelMask);
+        foreach (var hitCollider in hitColliders)
+        {
+            bool wasSuccessful = inventory.AddItem(hitCollider.gameObject.GetComponent<Interactable>());
+        }
     }
 }

@@ -22,12 +22,10 @@ public class MetalDetector : MonoBehaviour
 
     public void Detect()
     {
-        //TODO: Implement detecting. Find all objects with IInteractable and check their range
         Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, range, metalDetectionMask);
         foreach (var hitCollider in hitColliders)
         {
             Debug.Log("Hit " + hitCollider.name);
         } 
-
     }
 }
