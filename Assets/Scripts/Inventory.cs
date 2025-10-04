@@ -7,7 +7,7 @@ public class Inventory : MonoBehaviour
     List<ItemData> items = new List<ItemData>();
     public int maxSize = 2;
     private float money = 0f;
-
+    public float maxMoney = 1000f;
 
     public bool AddItem(ItemData item)
     {

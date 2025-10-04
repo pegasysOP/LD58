@@ -57,9 +57,45 @@ public class Shop : MonoBehaviour
                 metalDetector.range *= 2;
                 Debug.Log("Range: " + metalDetector.range);
                 break;
+
+            case Upgrades.Upgrade.Range2:
+                metalDetector.range *= 2;
+                Debug.Log("Range: " + metalDetector.range);
+                break;
+
+            case Upgrades.Upgrade.Backpack1:
+                inventory.maxSize += 1;
+                Debug.Log(inventory.maxSize);
+                break;
+
+            case Upgrades.Upgrade.WalletSize1:
+                inventory.maxMoney *= 2;
+                Debug.Log(inventory.maxMoney);
+                break;
+
+            case Upgrades.Upgrade.Rarity1:
+                Debug.LogError("Upgrade " + upgrade.ToString() + " is not yet implemented");
+                break;
+
+            case Upgrades.Upgrade.GoldDetector:
+                Debug.LogError("Upgrade " + upgrade.ToString() + " is not yet implemented");
+                break;
+
+            case Upgrades.Upgrade.HeartbeatSensor:
+                Debug.LogError("Upgrade " + upgrade.ToString() + " is not yet implemented");
+                break;
+
+            case Upgrades.Upgrade.Fossils:
+                Debug.LogError("Upgrade " + upgrade.ToString() + " is not yet implemented");
+                break;
+
+            case Upgrades.Upgrade.AlienTech:
+                Debug.LogError("Upgrade " + upgrade.ToString() + " is not yet implemented");
+                break;
+
             default:
-                Debug.Log("Upgrade " + upgrade.ToString() + " is not yet implemented");
+                Debug.LogError("Upgrade " + upgrade.ToString() + " is not yet implemented");
                 break;
         }
     }
-}
+} 
