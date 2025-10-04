@@ -315,14 +315,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 1782707436106725030, guid: fd7b04d50cc5d9842bb77ce3ff67b8f8, type: 3}
-      propertyPath: metalDetectionMask.m_Bits
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7105348960673332296, guid: fd7b04d50cc5d9842bb77ce3ff67b8f8, type: 3}
-      propertyPath: shovelMask.m_Bits
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8535457319218612281, guid: fd7b04d50cc5d9842bb77ce3ff67b8f8, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5.00941
@@ -381,7 +373,7 @@ GameObject:
   - component: {fileID: 1665640510}
   - component: {fileID: 1665640509}
   - component: {fileID: 1665640513}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}

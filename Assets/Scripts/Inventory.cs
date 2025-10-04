@@ -36,6 +36,7 @@ public class Inventory : MonoBehaviour
         {
             items.Remove(item);
             money += item.Value;
+            Debug.Log(money);
             return true;
         }
         return false;
@@ -49,6 +50,11 @@ public class Inventory : MonoBehaviour
     public Interactable GetItem(int index)
     {
         return items[index];
+    }
+
+    public int GetCurrentSize()
+    {
+        return items.Count;
     }
 
 }
