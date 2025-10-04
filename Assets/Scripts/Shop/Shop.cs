@@ -1,5 +1,4 @@
-using NUnit.Framework;
-using System.Runtime.CompilerServices;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,10 +7,9 @@ public class Shop : MonoBehaviour
     private Keyboard keyboard;
     private Inventory inventory;
     private MetalDetector metalDetector;
-    private Upgrades upgrades;
+    public Upgrades upgrades;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Start()
     {
         keyboard = Keyboard.current;
         inventory = FindFirstObjectByType<Inventory>();
@@ -20,28 +18,37 @@ public class Shop : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if (keyboard.eKey.wasPressedThisFrame) OpenShop();
+        if (keyboard.eKey.wasPressedThisFrame)
+            OpenShop();
 
-        if (keyboard.digit1Key.wasPressedThisFrame) BuyUpgrade(Upgrades.Upgrade.Range1);
+        if (keyboard.digit1Key.wasPressedThisFrame)
+            BuyUpgrade(Upgrade.Range);
     }
 
-    void OpenShop()
+    private void OpenShop()
     {
-        for (int i = 0; i <= inventory.GetCurrentSize(); i++)
-        {
-            //FIXME: This should use < instead. But for some reason that isn't working. 
-            Debug.Log("Current size: " + inventory.GetCurrentSize());
-            inventory.RemoveItem();
-        }
+        GameManager.Instance.hudController.ShowShop(this);
     }
 
-    void BuyUpgrade(Upgrades.Upgrade upgrade) 
+    public float SellItems()
     {
-        if(inventory.GetMoney() >= upgrades.upgradeCostDictionary[upgrade])
+        return inventory.SellAll();
+
+        // cursed, do not use
+        //for (int i = 0; i < inventory.GetCurrentSize(); i++)
+        //{
+        //    Debug.Log($"Current size: {inventory.GetCurrentSize()}, i: {i}");
+        //    inventory.RemoveItem();
+        //}
+    }
+
+    private void BuyUpgrade(Upgrade upgrade) 
+    {
+        if(inventory.GetMoney() >= upgrades.upgradeCosts[upgrade])
         {
-            inventory.DeductMoney(upgrades.upgradeCostDictionary[upgrade]);
+            inventory.DeductMoney(upgrades.upgradeCosts[upgrade]);
 
             ApplyUpgrade(upgrade);
         }
@@ -49,47 +56,42 @@ public class Shop : MonoBehaviour
         Debug.Log(inventory.GetMoney() + " Unable to afford upgrade. Better luck next time!");  
     }
 
-    void ApplyUpgrade(Upgrades.Upgrade upgrade)
+    private void ApplyUpgrade(Upgrade upgrade)
     {
         switch (upgrade)
         {
-            case Upgrades.Upgrade.Range1:
+            case Upgrade.Range:
                 metalDetector.range *= 2;
                 Debug.Log("Range: " + metalDetector.range);
                 break;
 
-            case Upgrades.Upgrade.Range2:
-                metalDetector.range *= 2;
-                Debug.Log("Range: " + metalDetector.range);
-                break;
-
-            case Upgrades.Upgrade.Backpack1:
+            case Upgrade.Backpack:
                 inventory.maxSize += 1;
                 Debug.Log(inventory.maxSize);
                 break;
 
-            case Upgrades.Upgrade.WalletSize1:
+            case Upgrade.WalletSize:
                 inventory.maxMoney *= 2;
                 Debug.Log(inventory.maxMoney);
                 break;
 
-            case Upgrades.Upgrade.Rarity1:
+            case Upgrade.Rarity:
                 Debug.LogError("Upgrade " + upgrade.ToString() + " is not yet implemented");
                 break;
 
-            case Upgrades.Upgrade.GoldDetector:
+            case Upgrade.GoldDetector:
                 Debug.LogError("Upgrade " + upgrade.ToString() + " is not yet implemented");
                 break;
 
-            case Upgrades.Upgrade.HeartbeatSensor:
+            case Upgrade.HeartbeatSensor:
                 Debug.LogError("Upgrade " + upgrade.ToString() + " is not yet implemented");
                 break;
 
-            case Upgrades.Upgrade.Fossils:
+            case Upgrade.Fossils:
                 Debug.LogError("Upgrade " + upgrade.ToString() + " is not yet implemented");
                 break;
 
-            case Upgrades.Upgrade.AlienTech:
+            case Upgrade.AlienTech:
                 Debug.LogError("Upgrade " + upgrade.ToString() + " is not yet implemented");
                 break;
 

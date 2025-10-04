@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 
     public PlayerController playerController;
     public CameraController cameraController;
+    public HudController hudController;
 
     private void Awake()
     {
