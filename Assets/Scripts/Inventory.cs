@@ -30,11 +30,12 @@ public class Inventory : MonoBehaviour
         return false;
     }
 
-    public bool RemoveItem(Interactable item)
+    public bool RemoveItem()
     {
         if (items.Count > 0)
         {
-            items.Remove(item);
+            Interactable item = items[0];
+            items.RemoveAt(0);
             money += item.Value;
             Debug.Log(money);
             return true;
@@ -55,6 +56,20 @@ public class Inventory : MonoBehaviour
     public int GetCurrentSize()
     {
         return items.Count;
+    }
+
+    public float GetMoney()
+    {
+        return money;
+    }
+
+    public void DeductMoney(float cost)
+    {
+        if(money - cost < 0f)
+        {
+            Debug.LogError("Trying to set negative amount.");
+        }
+        this.money -= cost;
     }
 
 }
