@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5786254294602685839}
   - component: {fileID: 6189494663581875946}
   - component: {fileID: 2105909116531319252}
+  - component: {fileID: 95141286619121530}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -51,6 +52,10 @@ MonoBehaviour:
   playerController: {fileID: 0}
   cameraController: {fileID: 0}
   hudController: {fileID: 0}
+  inventory: {fileID: 0}
+  metalDetector: {fileID: 0}
+  upgrades: {fileID: 0}
+  LOCKED: 0
 --- !u!114 &5786254294602685839
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64,18 +69,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AudioManager
   musicSource: {fileID: 6189494663581875946}
-  sfxSource: {fileID: 6189494663581875946}
+  sfxSource: {fileID: 95141286619121530}
   fadeSource: {fileID: 6189494663581875946}
   buttonPressClip: {fileID: 0}
   buttonHoverClip: {fileID: 0}
   pauseMenuOpenClip: {fileID: 0}
   pauseMenuClosedClip: {fileID: 0}
+  waveClip: {fileID: 8300000, guid: d85ab248a825c49eeab22d302441b3ba, type: 3}
+  coinClips:
+  - {fileID: 8300000, guid: 0f96e5d531f2841c98f7f31a23101785, type: 3}
+  - {fileID: 8300000, guid: 8e13fd0b381a541f588a510f7e004f91, type: 3}
+  - {fileID: 8300000, guid: aed66dc11b3a742d8be04f42f7dc46dc, type: 3}
+  - {fileID: 8300000, guid: f5ed25a809e0548948b57f93d2a690cd, type: 3}
+  - {fileID: 8300000, guid: 81e73b2babd5a470c9d0c2edf877129e, type: 3}
+  digSandClips:
+  - {fileID: 8300000, guid: 839764df8a6d248ae867bc30769adc31, type: 3}
+  - {fileID: 8300000, guid: 841e22c78d3754687b2f0eae1d6540db, type: 3}
+  - {fileID: 8300000, guid: 79a641ff5c0e94eb3bea6fd03331f19e, type: 3}
   selectClip: {fileID: 0}
   selectBlockedClip: {fileID: 0}
   menuMusicClip: {fileID: 0}
   gameWonClip: {fileID: 0}
   gameLostClip: {fileID: 0}
   hawiiSongClip: {fileID: 8300000, guid: 394560921e271a5409a950f39c751d1f, type: 3}
+  jazzSongClip: {fileID: 8300000, guid: 0861af11dcfc56f448b29baac4348d9e, type: 3}
 --- !u!82 &6189494663581875946
 AudioSource:
   m_ObjectHideFlags: 0
@@ -185,3 +202,100 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4fb1851f73d6854084eca2cebb191cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SettingsUtils
+--- !u!82 &95141286619121530
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5500071337967560426}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 0.4
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

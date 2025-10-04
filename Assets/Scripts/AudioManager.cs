@@ -16,6 +16,8 @@ public class AudioManager : MonoBehaviour
 
     [Header("SFX")]
     public AudioClip waveClip;
+    public AudioClip[] coinClips;
+    public List<AudioClip> digSandClips;
 
     [Header("Interaction")]
     public AudioClip selectClip;
@@ -113,9 +115,9 @@ public class AudioManager : MonoBehaviour
             Debug.LogError("ERROR: there are no sounds to pitch shift!");
 
         int index = Random.Range(0, clips.Count);
-        sfxSource.clip = clips[index];
         sfxSource.pitch = Random.Range(minPitch, maxPitch);
-        sfxSource.PlayOneShot(sfxSource.clip);
+        sfxSource.PlayOneShot(clips[index]);
+        sfxSource.pitch = 1f;
     }
 
     //==================== Volume ====================
