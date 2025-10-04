@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 public class MetalDetector : MonoBehaviour
 {
-    float range = 200f;
+    float range = 2f;
     float battery = 100f;
     private Mouse mouse;
 
