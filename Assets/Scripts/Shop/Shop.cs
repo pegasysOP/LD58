@@ -14,6 +14,7 @@ public class Shop : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        // TODO: make this have to interact with shop object
         if (keyboard.eKey.wasPressedThisFrame)
             OpenShop();
 

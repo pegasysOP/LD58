@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -13,6 +12,8 @@ public class GameManager : MonoBehaviour
     public Inventory inventory;
     public MetalDetector metalDetector;
     public Upgrades upgrades;
+
+    public bool LOCKED = false;
 
     private void Awake()
     {
@@ -31,11 +32,21 @@ public class GameManager : MonoBehaviour
         inventory = FindFirstObjectByType<Inventory>();
         metalDetector = FindFirstObjectByType<MetalDetector>();
         upgrades = FindFirstObjectByType<Upgrades>();
+
+        SetLocked(false);
     }
+
     public void DestroySelf()
     {
         Time.timeScale = 1;
 
         Destroy(gameObject);
+    }
+
+    public void SetLocked(bool locked)
+    {
+        LOCKED = locked;
+        Cursor.visible = locked;
+        Cursor.lockState = locked ? CursorLockMode.None : CursorLockMode.Locked;
     }
 }

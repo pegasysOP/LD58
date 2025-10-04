@@ -42,6 +42,8 @@ public class ShopPanel : MonoBehaviour
             upgradeComponent.Init(upgradeCost.Key.ToString(), upgradeCost.Value); // TODO: replace with proper upgrade name
             upgradeComponents.Add(upgradeComponent.gameObject);
         }
+
+        GameManager.Instance.SetLocked(true);
     }
 
     public void CloseShop()
@@ -51,6 +53,7 @@ public class ShopPanel : MonoBehaviour
 
         upgradeComponents.Clear();
 
+        GameManager.Instance.SetLocked(false);
         gameObject.SetActive(false);
     }
 
