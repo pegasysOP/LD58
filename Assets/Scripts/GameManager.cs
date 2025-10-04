@@ -6,6 +6,9 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     public AudioManager audioManager;
 
+    public PlayerController playerController;
+    public CameraController cameraController;
+
     private void Awake()
     {
         if (Instance == null)

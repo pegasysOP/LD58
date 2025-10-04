@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//d/Unity/GAME JAMS/Ludum Dare/Somnium/Assets/Scripts/Player/**)",
+      "Read(//d/Unity/GAME JAMS/Ludum Dare/Somnium/Assets/Prefabs/**)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
