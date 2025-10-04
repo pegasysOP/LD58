@@ -45,6 +45,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49f8d7c0576735a459ff247f420a2130, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  metalDetectionMask:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!114 &7791059756583843612
 MonoBehaviour:
   m_ObjectHideFlags: 0
