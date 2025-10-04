@@ -5,17 +5,17 @@ public class MetalDetector : MonoBehaviour
 {
     float range = 2f;
     float battery = 100f;
-    private Keyboard keyboard;
+    private Mouse mouse; 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        keyboard = Keyboard.current;
+        mouse = Mouse.current;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (keyboard.eKey.isPressed) Detect();
+        if (mouse.rightButton.isPressed) Detect();
     }
 
     public void Detect()
