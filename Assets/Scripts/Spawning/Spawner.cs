@@ -1,11 +1,16 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Spawner : MonoBehaviour
 {
     public Collider spawnerArea;
-    public GameObject placeholderItem;
     public LayerMask groundLayer;
+
+    [Header("Items")]
+    public List<Item> items = new List<Item>();
+
+    private List<GameObject> spawnedItems = new List<GameObject>();
 
     private void Update()
     {
@@ -30,6 +35,28 @@ public class Spawner : MonoBehaviour
         // TODO: go under ground in future
         spawnPosition.y -= 0.45f;
 
-        Instantiate(placeholderItem, spawnPosition, Quaternion.identity);
+        GameObject spawnedItem = Instantiate(GetItemToSpawn(), spawnPosition, Quaternion.identity);
+        spawnedItem.transform.SetParent(this.transform);
+        spawnedItems.Add(spawnedItem);
+    }
+
+    private GameObject GetItemToSpawn()
+    {
+        float totalWeight = 0f;
+        foreach (Item item in items)
+            totalWeight += 1f / item.rarity;
+
+        float randomPoint = Random.Range(0f, totalWeight);
+
+        float currentWeight = 0f;
+        foreach (Item item in items)
+        {
+            currentWeight += 1f / item.rarity;
+            if (randomPoint <= currentWeight)
+                return item.itemPrefab;
+        }
+
+        // fallback
+        return items[0].itemPrefab;
     }
 }

@@ -258,7 +258,7 @@ GameObject:
   - component: {fileID: 449573830}
   - component: {fileID: 449573834}
   m_Layer: 11
-  m_Name: Spawn Area
+  m_Name: Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -317,6 +317,9 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 4096
+  items:
+  - {fileID: 11400000, guid: c7451c760802bcb46adb9ff3331256c8, type: 2}
+  - {fileID: 11400000, guid: b106c184cf2d5884a8733d7362207611, type: 2}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -817,15 +820,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8535457319218612281, guid: fd7b04d50cc5d9842bb77ce3ff67b8f8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.98943
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8535457319218612281, guid: fd7b04d50cc5d9842bb77ce3ff67b8f8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.92
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8535457319218612281, guid: fd7b04d50cc5d9842bb77ce3ff67b8f8, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.00777
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8535457319218612281, guid: fd7b04d50cc5d9842bb77ce3ff67b8f8, type: 3}
       propertyPath: m_LocalRotation.w
