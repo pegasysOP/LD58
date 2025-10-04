@@ -10,7 +10,7 @@ public class Spawner : MonoBehaviour
     [Header("Items")]
     public List<Item> items = new List<Item>();
 
-    private List<GameObject> spawnedItems = new List<GameObject>();
+    private List<ItemObject> spawnedItems = new List<ItemObject>();
 
     private void Start()
     {
@@ -47,9 +47,9 @@ public class Spawner : MonoBehaviour
         Item chosenItem = GetItemToSpawn();
         ItemObject spawnedItem = Instantiate(chosenItem.objectPrefab, spawnPosition, Quaternion.identity);
         spawnedItem.transform.SetParent(transform);
-        spawnedItem.Init(chosenItem);
+        spawnedItem.Init(chosenItem, OnItemDestroyed);
 
-        spawnedItems.Add(spawnedItem.gameObject);
+        spawnedItems.Add(spawnedItem);
     }
 
     private Item GetItemToSpawn()
@@ -74,12 +74,17 @@ public class Spawner : MonoBehaviour
 
     private void ResetSpawns()
     {
-        foreach (GameObject spawnedItem in spawnedItems)
+        foreach (ItemObject spawnedItem in spawnedItems)
             Destroy(spawnedItem);
 
         spawnedItems.Clear();
 
         for (int i = 0; i < maxItems; i++)
             SpawnItem();
+    }
+
+    private void OnItemDestroyed(ItemObject itemObject)
+    {
+        spawnedItems.Remove(itemObject);
     }
 }
