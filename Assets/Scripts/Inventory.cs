@@ -6,6 +6,8 @@ public class Inventory : MonoBehaviour
 {
     List<Interactable> items;
     public int maxSize = 2;
+    private float money = 0f;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -33,6 +35,7 @@ public class Inventory : MonoBehaviour
         if (items.Count > 0)
         {
             items.Remove(item);
+            money += item.Value;
             return true;
         }
         return false;
