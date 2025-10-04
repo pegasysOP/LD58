@@ -1,23 +1,32 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class Spawner : MonoBehaviour
 {
     public Collider spawnerArea;
     public LayerMask groundLayer;
+    public int maxItems = 5;
 
     [Header("Items")]
     public List<Item> items = new List<Item>();
 
     private List<GameObject> spawnedItems = new List<GameObject>();
 
-    private void Update()
+    private void Start()
     {
-        if (Keyboard.current.pKey.wasPressedThisFrame)
-        {
+        // initial spawn
+        for (int i = 0; i < maxItems; i++)
             SpawnItem();
-        }
+
+        InvokeRepeating(nameof(TrySpawnItem), 0f, 5f);
+    }
+
+    public void TrySpawnItem()
+    {
+        if (spawnedItems.Count >= maxItems)
+            return;
+
+        SpawnItem();
     }
 
     private void SpawnItem()
