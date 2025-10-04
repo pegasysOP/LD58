@@ -79,5 +79,7 @@ public class MetalDetector : MonoBehaviour
 
         audioSource.pitch = Mathf.Lerp(minPitch, maxPitch, proximity);
         audioSource.PlayOneShot(metalDetectorBeep);
+        AudioManager.Instance.StartDuckAudio(AudioManager.Instance.musicSource, 0.1f, 0.5f, 0.5f);
+
     }
 }

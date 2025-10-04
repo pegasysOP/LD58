@@ -28,6 +28,9 @@ public class AudioManager : MonoBehaviour
 
     private Coroutine currentCoroutine;
 
+    private float remainingDuckTime = 0f;
+
+
     public enum FadeType { None, FadeIn, CrossFade }
 
     public void Init()
@@ -121,7 +124,7 @@ public class AudioManager : MonoBehaviour
 
     //==================== Ducking ====================
 
-    private void StartDuckAudio(AudioSource sourceToDuck, float duckVolumePercent = 0.3f, float duckDuration = 2f, float fadeTime = 0.5f)
+    public void StartDuckAudio(AudioSource sourceToDuck, float duckVolumePercent = 0.3f, float duckDuration = 2f, float fadeTime = 0.5f)
     {
         if (currentCoroutine != null)
         {
@@ -132,37 +135,45 @@ public class AudioManager : MonoBehaviour
     }
 
     private IEnumerator DuckAudio(AudioSource source, float duckVolumePercent, float duckDuration, float fadeTime)
+{
+    if (!source.isPlaying)
     {
-        if (!source.isPlaying)
-        {
-            yield break;
-        }
-
-        float originalVolume = SettingsUtils.GetMasterVolume() / 3;
-        float duckVolume = originalVolume * duckVolumePercent;
-
-        for (float t = 0; t < fadeTime; t += Time.deltaTime)
-        {
-            float normalized = t / fadeTime;
-            source.volume = Mathf.Lerp(originalVolume, duckVolume, normalized);
-            yield return null;
-        }
-
-        source.volume = duckVolume;
-
-        yield return new WaitForSeconds(duckDuration);
-
-        for (float t = 0; t < fadeTime; t += Time.deltaTime)
-        {
-            float normalized = t / fadeTime;
-            source.volume = Mathf.Lerp(duckVolume, originalVolume, normalized);
-            yield return null;
-        }
-
-        source.volume = originalVolume;
-
-        currentCoroutine = null;
+        yield break;
     }
+
+    float originalVolume = SettingsUtils.GetMasterVolume() / 3;
+    float duckVolume = originalVolume * duckVolumePercent;
+
+    // Fade down
+    for (float t = 0; t < fadeTime; t += Time.deltaTime)
+    {
+        float normalized = t / fadeTime;
+        source.volume = Mathf.Lerp(source.volume, duckVolume, normalized);
+        yield return null;
+    }
+
+    source.volume = duckVolume;
+
+    remainingDuckTime = Mathf.Min(remainingDuckTime, duckDuration);
+
+    while (remainingDuckTime > 0f)
+    {
+        remainingDuckTime -= Time.deltaTime;
+        yield return null;
+    }
+
+    for (float t = 0; t < fadeTime; t += Time.deltaTime)
+    {
+        float normalized = t / fadeTime;
+        source.volume = Mathf.Lerp(duckVolume, originalVolume, normalized);
+        yield return null;
+    }
+
+    source.volume = originalVolume;
+
+    currentCoroutine = null;
+    remainingDuckTime = 0f;
+}
 
     //==================== Fading ====================
 
