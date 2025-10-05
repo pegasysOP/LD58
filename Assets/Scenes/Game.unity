@@ -2257,6 +2257,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Radio
       objectReference: {fileID: 0}
+    - target: {fileID: 2421079489362405889, guid: 79c9de4494af5714088068d81bad8473, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5246266350522490499, guid: 79c9de4494af5714088068d81bad8473, type: 3}
       propertyPath: m_LocalPosition.x
       value: 14.15
