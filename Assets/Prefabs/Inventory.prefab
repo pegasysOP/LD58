@@ -71,9 +71,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fa987df30c8a9c4e8ce159039e9e7c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Shovel
-  shovelMask:
+  interactableMask:
     serializedVersion: 2
     m_Bits: 4096
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 2048
+  range: 3
 --- !u!114 &2382892513010379921
 MonoBehaviour:
   m_ObjectHideFlags: 0
