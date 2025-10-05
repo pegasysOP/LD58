@@ -53,13 +53,13 @@ public class Spawner : MonoBehaviour
         if (hitInfo.collider != null)
             spawnPosition.y = hitInfo.point.y;
 
-        // TODO: go under ground instead
-        //spawnPosition.y -= 1f;
-
         Item chosenItem = GetItemToSpawn();
-        ItemObject spawnedItem = Instantiate(chosenItem.objectPrefab, spawnPosition, Quaternion.identity);
-        spawnedItem.transform.SetParent(transform);
+        ItemObject spawnedItem = Instantiate(chosenItem.objectPrefab, spawnPosition, Random.rotation);
         spawnedItem.Init(chosenItem, OnItemDestroyed);
+
+        Debug.Log($"Item Height: {spawnedItem.GetItemHeight()}");
+        spawnedItem.transform.position -= new Vector3(0f, spawnedItem.GetItemHeight() / 2, 0f); // start under ground 
+        spawnedItem.transform.SetParent(transform);
 
         spawnedItems.Add(spawnedItem);
     }

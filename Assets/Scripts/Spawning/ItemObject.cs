@@ -3,6 +3,10 @@ using UnityEngine;
 
 public class ItemObject : MonoBehaviour, IInteractable
 {
+    public int digTimes = 3;
+
+    private MeshRenderer mesh;
+
     private ItemData itemData;
     private float rangeMultiplier;
     private Action<ItemObject> onDestroy;
@@ -18,14 +22,37 @@ public class ItemObject : MonoBehaviour, IInteractable
         this.rangeMultiplier = itemInfo.rangeMultiplier;
 
         this.onDestroy = onDestroy;
+
+        mesh = GetComponent<MeshRenderer>();
     }
 
     public void OnInteract()
     {
-        Debug.Log($"Interacted with {itemData.Name} with value: {itemData.Value}");
+        if (digTimes > 1)
+        {
+            digTimes--;
+            AudioManager.Instance.PlaySfxWithPitchShifting(AudioManager.Instance.digSandClips);
+
+            // move up a bit
+            transform.position += new Vector3(0f, GetItemHeight() / 3f, 0f);
+
+            return;
+        }
+
+        // collect
+        bool wasSuccessful = GameManager.Instance.inventory.AddItem(ItemData);
+        GameManager.Instance.hudController.UpdateInventory();
+        AudioManager.Instance.PlaySfx(AudioManager.Instance.coinClips);
 
         onDestroy?.Invoke(this);
 
         Destroy(gameObject);
+    }
+
+    public float GetItemHeight()
+    {
+        if (mesh == null)
+            return 0f;
+        return mesh.bounds.size.y;
     }
 }

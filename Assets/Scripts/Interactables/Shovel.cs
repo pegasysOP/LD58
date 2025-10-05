@@ -6,12 +6,10 @@ public class Shovel : MonoBehaviour
     float range = 2f;
     private Mouse mouse;
     public LayerMask shovelMask;
-    private Inventory inventory;
      
     void Start()
     {
         mouse = Mouse.current;
-        inventory = FindFirstObjectByType<Inventory>();
     }
 
     void Update()
@@ -24,8 +22,7 @@ public class Shovel : MonoBehaviour
     }
 
     public void Dig()
-    {
-        AudioManager.Instance.PlaySfxWithPitchShifting(AudioManager.Instance.digSandClips);
+    {        
         Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, range, shovelMask);
         foreach (Collider hitCollider in hitColliders)
         {
@@ -34,12 +31,7 @@ public class Shovel : MonoBehaviour
                 continue;
 
             interactable.OnInteract();
-            bool wasSuccessful = inventory.AddItem(interactable.ItemData);
-            if (wasSuccessful)
-            {
-                GameManager.Instance.hudController.UpdateInventory();
-                return;
-            }
+            return;
         }
     }
 }
