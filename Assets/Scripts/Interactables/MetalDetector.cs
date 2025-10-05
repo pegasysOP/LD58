@@ -18,6 +18,7 @@ public class MetalDetector : MonoBehaviour
 
     [Header("Audio Settings")]
     public AudioClip metalDetectorBeep;
+    public AudioClip foundMetalDetectorBeep;
     public float minPitch = 0.8f;
     public float maxPitch = 2.0f;
     private float minBeepInterval = 0.2f;
@@ -50,6 +51,7 @@ public class MetalDetector : MonoBehaviour
         else
         {
             beepTimer = 0f;
+            audioSource.Stop();
         }
     }
 
@@ -110,11 +112,22 @@ public class MetalDetector : MonoBehaviour
 
     void PlayBeep(float proximity)
     {
+        Debug.Log("Proximity: " + proximity);
         if (audioSource == null || metalDetectorBeep == null)
             return;
 
         audioSource.pitch = Mathf.Lerp(minPitch, maxPitch, proximity);
-        audioSource.PlayOneShot(metalDetectorBeep);
+        if(proximity >= 0.75f)
+        {
+            audioSource.Stop();
+            audioSource.PlayOneShot(foundMetalDetectorBeep);
+        }
+        else
+        {
+            audioSource.Stop();
+            audioSource.PlayOneShot(metalDetectorBeep);
+        }
+            
         AudioManager.Instance.StartDuckAudio(AudioManager.Instance.musicSource, 0.1f, 0.5f, 0.5f);
 
     }
