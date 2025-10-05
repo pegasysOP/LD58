@@ -15,9 +15,6 @@ public class GameManager : MonoBehaviour
     public MetalDetector metalDetector;
     public List<UpgradeData> upgrades = new List<UpgradeData>();
 
-    public GameObject pauseMenu;
-    public bool isPaused = false;
-
     private Keyboard keyboard;
 
     public bool LOCKED = false;
@@ -61,8 +58,7 @@ public class GameManager : MonoBehaviour
     {
         if (keyboard.escapeKey.wasPressedThisFrame)
         {
-            //FIXME: Pause menu won't close after opening 
-            pauseMenu.gameObject.SetActive(isPaused ? false : true);
+            hudController.pauseMenu.Toggle();
         }
     }
 

@@ -4,7 +4,6 @@ public class SettingsUtils : MonoBehaviour
 {
     private const string SensitivityKey = "Sensitivity";
     private const string MasterVolumeKey = "MasterVolume";
-    private const string SfxVolumeKey = "SfxVolume";
 
     public static float GetSensitivity()
     {
@@ -25,17 +24,6 @@ public class SettingsUtils : MonoBehaviour
     public static void SetMasterVolume(float value)
     {
         PlayerPrefs.SetFloat(MasterVolumeKey, value);
-        PlayerPrefs.Save();
-    }
-
-    public static float GetSfxVolume()
-    {
-        return PlayerPrefs.GetFloat(SfxVolumeKey, 1.0f);
-    }
-
-    public static void SetSfxVolume(float value)
-    {
-        PlayerPrefs.SetFloat(SfxVolumeKey, value);
         PlayerPrefs.Save();
     }
 }

@@ -11,6 +11,7 @@ public class HudController : MonoBehaviour
     public TextMeshProUGUI batteryText;
     public InventoryPanel inventoryPanel;
     public ShopPanel shopPanel;
+    public PauseMenu pauseMenu;
 
     public void UpdateMoneyText(float money)
     {
