@@ -22,6 +22,7 @@ public class Radio : MonoBehaviour
         {
             isPlaying = true;
             CreatePlaylist();
+            AudioManager.Instance.PlayMusic(playlist[currentSongIndex], AudioManager.FadeType.FadeIn, 5f);
         }
 
         if (keyboard.mKey.wasPressedThisFrame)
