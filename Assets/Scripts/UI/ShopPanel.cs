@@ -34,16 +34,31 @@ public class ShopPanel : MonoBehaviour
 
     public void OpenShop(Shop shop)
     {
-        currentShop = shop;
+        currentShop = shop;  
 
         foreach (UpgradeData upgradeData in GameManager.Instance.upgrades)
         {
             ShopUpgrade upgradeComponent = Instantiate(upgradeComponentPrefab, upgradeComponentContainer);
-            upgradeComponent.Init(upgradeData);
+            upgradeComponent.Init(upgradeData, OnBuyButtonClick);
             upgradeComponents.Add(upgradeComponent.gameObject);
         }
 
         GameManager.Instance.SetLocked(true);
+    }
+
+    private void RefreshShop()
+    {
+        foreach (GameObject upgradeComponent in upgradeComponents)
+            Destroy(upgradeComponent);
+
+        upgradeComponents.Clear();
+
+        foreach (UpgradeData upgradeData in GameManager.Instance.upgrades)
+        {
+            ShopUpgrade upgradeComponent = Instantiate(upgradeComponentPrefab, upgradeComponentContainer);
+            upgradeComponent.Init(upgradeData, OnBuyButtonClick);
+            upgradeComponents.Add(upgradeComponent.gameObject);
+        }
     }
 
     public void CloseShop()
@@ -60,5 +75,12 @@ public class ShopPanel : MonoBehaviour
     private void OnSellButtonClick()
     {
         currentShop.SellItems();
+        RefreshShop();
+    }
+
+    private void OnBuyButtonClick(UpgradeData upgradeData)
+    {
+        currentShop.BuyUpgrade(upgradeData);
+        RefreshShop();
     }
 }

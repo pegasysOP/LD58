@@ -10,6 +10,7 @@ public class ShopUpgrade : MonoBehaviour
     public Button upgradeButton;
 
     private UpgradeData upgradeData;
+    private Action<UpgradeData> onUpgrade;
 
     private void OnEnable()
     {
@@ -21,16 +22,33 @@ public class ShopUpgrade : MonoBehaviour
         upgradeButton.onClick.RemoveListener(OnUpgradeButtonClick);
     }
 
-    public void Init(UpgradeData upgradeData)
+    public void Init(UpgradeData upgradeData, Action<UpgradeData> onUpgrade)
     {
         this.upgradeData = upgradeData;
+        this.onUpgrade = onUpgrade;
 
         nameText.text = upgradeData.name;
         costText.text = "$" + upgradeData.cost.ToString("F2");
+
+        if (GameManager.Instance.inventory.GetMoney() < upgradeData.cost)
+        {
+            upgradeButton.interactable = false;
+            costText.color = Color.red;
+        }
+        else
+        {
+            upgradeButton.interactable = true;
+            costText.color = Color.white;
+        }
     }
 
     private void OnUpgradeButtonClick()
     {
-        GameManager.Instance.inventory.DeductMoney(upgradeData.cost); // TODO: use shop buy method and check money first
+        if (GameManager.Instance.inventory.GetMoney() < upgradeData.cost)
+            return;
+
+        onUpgrade?.Invoke(upgradeData);
+
+        //GameManager.Instance.inventory.DeductMoney(upgradeData.cost); // TODO: use shop buy method and check money first
     }
 }
