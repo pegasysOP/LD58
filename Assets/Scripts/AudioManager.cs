@@ -131,6 +131,11 @@ public class AudioManager : MonoBehaviour
         sfxSource.volume = value / 3;
     }
 
+    public void UpdateSfxVolume(float value)
+    {
+        sfxSource.volume = value / 3;
+    }
+
     //==================== Ducking ====================
 
     public void StartDuckAudio(AudioSource sourceToDuck, float duckVolumePercent = 0.3f, float duckDuration = 2f, float fadeTime = 0.5f)

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,6 +14,11 @@ public class GameManager : MonoBehaviour
     public Inventory inventory;
     public MetalDetector metalDetector;
     public List<UpgradeData> upgrades = new List<UpgradeData>();
+
+    public GameObject pauseMenu;
+    public bool isPaused = false;
+
+    private Keyboard keyboard;
 
     public bool LOCKED = false;
 
@@ -28,6 +34,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        keyboard = Keyboard.current;
         audioManager.Init();
 
         inventory = FindFirstObjectByType<Inventory>();
@@ -48,6 +55,15 @@ public class GameManager : MonoBehaviour
         hudController.UpdateInventory();
 
         SetLocked(false);
+    }
+
+    private void Update()
+    {
+        if (keyboard.escapeKey.wasPressedThisFrame)
+        {
+            //FIXME: Pause menu won't close after opening 
+            pauseMenu.gameObject.SetActive(isPaused ? false : true);
+        }
     }
 
     public void DestroySelf()
