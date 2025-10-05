@@ -48,16 +48,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   range: 5
+  ignoreAngleRange: 0.5
   maxAngle: 90
   metalDetectionMask:
     serializedVersion: 2
     m_Bits: 4096
   maxBattery: 100
   dischargeRate: 0
-  metalDetectorBeep: {fileID: 8300000, guid: 0b08e14f6a8c646cf9f83136e127cb8a, type: 3}
+  metalDetectorBeep: {fileID: 8300000, guid: 72d60790c61e7496fa484b2682840ae9, type: 3}
   foundMetalDetectorBeep: {fileID: 8300000, guid: 02c182c2b5a614f53927c476f304e458, type: 3}
-  minPitch: 0.5
-  maxPitch: 1.25
+  minPitch: 1
+  maxPitch: 1.5
 --- !u!114 &7791059756583843612
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -100,7 +101,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.75
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 0
   Mute: 0
