@@ -1261,6 +1261,11 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 252635032508089166, guid: 36ff8f570aa074e419d389460431718a, type: 3}
   m_PrefabInstance: {fileID: 1065410790}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1065410797 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7939822510200652730, guid: 36ff8f570aa074e419d389460431718a, type: 3}
+  m_PrefabInstance: {fileID: 1065410790}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1253344765 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 592739438738594241, guid: 17928bc0c7d0f634a877301ca1e63ff1, type: 3}
@@ -1754,6 +1759,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Game Manager
       objectReference: {fileID: 0}
+    - target: {fileID: 8604299526140403365, guid: 2588910add1eda14fb3990c1ee7ff1aa, type: 3}
+      propertyPath: pauseMenu
+      value: 
+      objectReference: {fileID: 1065410797}
     - target: {fileID: 8604299526140403365, guid: 2588910add1eda14fb3990c1ee7ff1aa, type: 3}
       propertyPath: hudController
       value: 
