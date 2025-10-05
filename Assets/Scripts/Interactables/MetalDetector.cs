@@ -100,7 +100,10 @@ public class MetalDetector : MonoBehaviour
         if (closestDistance > ignoreAngleRange)
         {
             float normalizedAngle = 1f - Mathf.Clamp01(angleToTarget / maxAngle);
-            audioSource.pitch = Mathf.Lerp(minPitch, maxPitch, normalizedAngle);
+            float exponent = 2f;
+            float curvedAngle = Mathf.Pow(normalizedAngle, exponent);
+
+            audioSource.pitch = Mathf.Lerp(minPitch, maxPitch, curvedAngle);
         }
         else
         {
