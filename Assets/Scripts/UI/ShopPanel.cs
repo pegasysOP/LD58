@@ -36,10 +36,10 @@ public class ShopPanel : MonoBehaviour
     {
         currentShop = shop;
 
-        foreach (KeyValuePair<Upgrade, float> upgradeCost in GameManager.Instance.upgrades.upgradeCosts)
+        foreach (UpgradeData upgradeData in GameManager.Instance.upgrades)
         {
             ShopUpgrade upgradeComponent = Instantiate(upgradeComponentPrefab, upgradeComponentContainer);
-            upgradeComponent.Init(upgradeCost.Key, upgradeCost.Value); // TODO: replace with proper upgrade name
+            upgradeComponent.Init(upgradeData);
             upgradeComponents.Add(upgradeComponent.gameObject);
         }
 

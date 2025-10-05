@@ -18,10 +18,7 @@ public class Shop : MonoBehaviour
     {
         // TODO: make this have to interact with shop object
         if (keyboard.eKey.wasPressedThisFrame)
-            OpenShop();
-
-        if (keyboard.digit1Key.wasPressedThisFrame)
-            BuyUpgrade(Upgrade.Range);
+            OpenShop();;
     }
 
     private void OpenShop()
@@ -32,22 +29,16 @@ public class Shop : MonoBehaviour
     public float SellItems()
     {
         return GameManager.Instance.inventory.SellAll();
-
-        // cursed, do not use
-        //for (int i = 0; i < inventory.GetCurrentSize(); i++)
-        //{
-        //    Debug.Log($"Current size: {inventory.GetCurrentSize()}, i: {i}");
-        //    inventory.RemoveItem();
-        //}
     }
 
-    private void BuyUpgrade(Upgrade upgrade) 
+    private void BuyUpgrade(ref UpgradeData upgradeData) 
     {
-        if(GameManager.Instance.inventory.GetMoney() >= GameManager.Instance.upgrades.upgradeCosts[upgrade])
+        if(GameManager.Instance.inventory.GetMoney() >= upgradeData.cost)
         {
-            GameManager.Instance.inventory.DeductMoney(GameManager.Instance.upgrades.upgradeCosts[upgrade]);
+            GameManager.Instance.inventory.DeductMoney(upgradeData.cost);
+            upgradeData.cost *= 1.5f; // increase cost for next time
 
-            ApplyUpgrade(upgrade);
+            ApplyUpgrade(upgradeData.upgrade);
         }
 
         Debug.Log(GameManager.Instance.inventory.GetMoney() + " Unable to afford upgrade. Better luck next time!");  

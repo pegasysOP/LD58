@@ -9,8 +9,7 @@ public class ShopUpgrade : MonoBehaviour
     public TextMeshProUGUI costText;
     public Button upgradeButton;
 
-    private Upgrade upgrade;
-    private float cost;
+    private UpgradeData upgradeData;
 
     private void OnEnable()
     {
@@ -22,17 +21,16 @@ public class ShopUpgrade : MonoBehaviour
         upgradeButton.onClick.RemoveListener(OnUpgradeButtonClick);
     }
 
-    public void Init(Upgrade upgrade, float cost)
+    public void Init(UpgradeData upgradeData)
     {
-        this.upgrade = upgrade;
-        this.cost = cost;
+        this.upgradeData = upgradeData;
 
-        nameText.text = upgrade.ToString();
-        costText.text = "$" + cost.ToString("F2");
+        nameText.text = upgradeData.name;
+        costText.text = "$" + upgradeData.cost.ToString("F2");
     }
 
     private void OnUpgradeButtonClick()
     {
-        GameManager.Instance.inventory.DeductMoney(cost); // TODO: use shop buy method and check money first
+        GameManager.Instance.inventory.DeductMoney(upgradeData.cost); // TODO: use shop buy method and check money first
     }
 }

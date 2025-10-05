@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6733420670196665523}
   - component: {fileID: 5120930737195903442}
-  - component: {fileID: 3549826937902921989}
   m_Layer: 0
   m_Name: Shop
   m_TagString: Untagged
@@ -45,16 +44,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7667c35d9a7000b4d9a37e55133deb40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Shop
-  upgrades: {fileID: 3549826937902921989}
---- !u!114 &3549826937902921989
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2250832823878130028}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ecd6f11f07c86464cb87e85faadb73d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Upgrades
