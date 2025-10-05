@@ -58,7 +58,7 @@ MonoBehaviour:
   metalDetectorBeep: {fileID: 8300000, guid: 72d60790c61e7496fa484b2682840ae9, type: 3}
   foundMetalDetectorBeep: {fileID: 8300000, guid: 02c182c2b5a614f53927c476f304e458, type: 3}
   minPitch: 1
-  maxPitch: 1.5
+  maxPitch: 1.25
 --- !u!114 &7791059756583843612
 MonoBehaviour:
   m_ObjectHideFlags: 0

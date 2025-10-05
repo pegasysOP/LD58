@@ -70,14 +70,16 @@ public class MetalDetector : MonoBehaviour
         Vector3 forward = Camera.main.transform.forward;
         Vector2 forward2D = new Vector2(forward.x, forward.z).normalized;
 
-
         List<Collider> validTargets = hitColliders
             .Where(hit =>
             {
-                Vector3 directionToTarget = (hit.transform.position - transform.position).normalized;
-                float angle = Vector3.Angle(forward, directionToTarget);
-                float distance = Vector3.Distance(transform.position, hit.transform.position);
-                return angle <= maxAngle || distance < ignoreAngleRange;
+                Vector2 target2D = new Vector2(hit.transform.position.x - transform.position.x,
+                                               hit.transform.position.z - transform.position.z);
+                float distance2D = target2D.magnitude;
+
+                float horizontalAngle = Vector2.Angle(forward2D, target2D.normalized);
+
+                return horizontalAngle <= maxAngle || distance2D < ignoreAngleRange;
             })
             .ToList();
 
@@ -88,22 +90,26 @@ public class MetalDetector : MonoBehaviour
         }
 
         Collider closestTarget = validTargets
-            .OrderBy(hit => Vector3.Distance(transform.position, hit.transform.position))
+            .OrderBy(hit =>
+            {
+                Vector2 target2D = new Vector2(hit.transform.position.x - transform.position.x,
+                                               hit.transform.position.z - transform.position.z);
+                return target2D.magnitude;
+            })
             .First();
 
-        float closestDistance = Vector3.Distance(transform.position, closestTarget.transform.position);
+        Vector2 closestTarget2D = new Vector2(closestTarget.transform.position.x - transform.position.x,
+                                              closestTarget.transform.position.z - transform.position.z);
+        float closestDistance2D = closestTarget2D.magnitude;
 
-        float proximity = Mathf.Clamp01(1f - (closestDistance / range));
+        float proximity = Mathf.Clamp01(1f - (closestDistance2D / range));
         beepInterval = Mathf.Lerp(maxBeepInterval, minBeepInterval, proximity);
 
-        Vector2 target2D = new Vector2(closestTarget.transform.position.x - transform.position.x,
-                                       closestTarget.transform.position.z - transform.position.z).normalized;
-
-        float horizontalAngle = Vector2.Angle(forward2D, target2D);
-
-        if (closestDistance > ignoreAngleRange)
+ 
+        float horizontalAngleToTarget = Vector2.Angle(forward2D, closestTarget2D.normalized);
+        if (closestDistance2D > ignoreAngleRange)
         {
-            float normalizedAngle = 1f - Mathf.Clamp01(horizontalAngle / maxAngle);
+            float normalizedAngle = 1f - Mathf.Clamp01(horizontalAngleToTarget / maxAngle);
             float exponent = 2f;
             float curvedAngle = Mathf.Pow(normalizedAngle, exponent);
 
@@ -114,7 +120,7 @@ public class MetalDetector : MonoBehaviour
             audioSource.pitch = maxPitch;
         }
 
-        Debug.Log($"Pitch: {audioSource.pitch:F2} | Angle: {horizontalAngle:F1}° | Distance: {closestDistance:F2}");
+        Debug.Log($"Pitch: {audioSource.pitch:F2} | Horizontal Angle: {horizontalAngleToTarget:F1}° | Horizontal Distance: {closestDistance2D:F2}");
 
         beepTimer += Time.deltaTime;
         if (beepTimer >= beepInterval)
