@@ -44,6 +44,10 @@ public class Inventory : MonoBehaviour
         items.Clear();
 
         money += gains;
+        if(gains > 0f)
+        {
+            AudioManager.Instance.PlaySfx(AudioManager.Instance.coinClips);
+        }
         GameManager.Instance.hudController.UpdateMoneyText(money);
 
         return gains;
@@ -71,8 +75,11 @@ public class Inventory : MonoBehaviour
 
     public void DeductMoney(float cost)
     {
-        if(money - cost < 0f)
-            Debug.LogError("Trying to set negative amount.");
+        if (money - cost < 0f)
+        {
+            Debug.LogWarning("Trying to set negative amount.");
+            return;
+        }
 
         this.money -= cost;
 

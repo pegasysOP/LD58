@@ -25,6 +25,7 @@ public class Shovel : MonoBehaviour
 
     public void Dig()
     {
+        AudioManager.Instance.PlaySfxWithPitchShifting(AudioManager.Instance.digSandClips);
         Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, range, shovelMask);
         foreach (Collider hitCollider in hitColliders)
         {

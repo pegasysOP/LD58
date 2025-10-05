@@ -14,6 +14,11 @@ public class AudioManager : MonoBehaviour
     public AudioClip pauseMenuOpenClip;
     public AudioClip pauseMenuClosedClip;
 
+    [Header("SFX")]
+    public AudioClip waveClip;
+    public List<AudioClip> coinClips;
+    public List<AudioClip> digSandClips;
+
     [Header("Interaction")]
     public AudioClip selectClip;
     public AudioClip selectBlockedClip;
@@ -23,6 +28,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip gameWonClip;
     public AudioClip gameLostClip;
     public AudioClip hawiiSongClip;
+    public AudioClip jazzSongClip;
 
     public static AudioManager Instance;
 
@@ -37,6 +43,7 @@ public class AudioManager : MonoBehaviour
     {
         Instance = this;
         UpdateVolume(SettingsUtils.GetMasterVolume());
+        Play(sfxSource, waveClip);
     }
 
     //==================== Utility ====================
@@ -108,9 +115,9 @@ public class AudioManager : MonoBehaviour
             Debug.LogError("ERROR: there are no sounds to pitch shift!");
 
         int index = Random.Range(0, clips.Count);
-        sfxSource.clip = clips[index];
         sfxSource.pitch = Random.Range(minPitch, maxPitch);
-        sfxSource.PlayOneShot(sfxSource.clip);
+        sfxSource.PlayOneShot(clips[index]);
+        sfxSource.pitch = 1f;
     }
 
     //==================== Volume ====================

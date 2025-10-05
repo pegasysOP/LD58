@@ -56,8 +56,56 @@ PrefabInstance:
       propertyPath: m_Name
       value: item_bucket_metal
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3b91e410186e60f40bf3df231ec616ad, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3b91e410186e60f40bf3df231ec616ad, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -2584835671864951318}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3b91e410186e60f40bf3df231ec616ad, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6081575518017936219}
   m_SourcePrefab: {fileID: 100100000, guid: 3b91e410186e60f40bf3df231ec616ad, type: 3}
+--- !u!1 &6606686921590530248 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 3b91e410186e60f40bf3df231ec616ad, type: 3}
+  m_PrefabInstance: {fileID: 6300187409666694553}
+  m_PrefabAsset: {fileID: 0}
+--- !u!135 &-2584835671864951318
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6606686921590530248}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 6.3921876
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6081575518017936219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6606686921590530248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 267292b140c1f7f499f81daff8bc6047, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ItemObject

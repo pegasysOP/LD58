@@ -53,8 +53,8 @@ public class Spawner : MonoBehaviour
         if (hitInfo.collider != null)
             spawnPosition.y = hitInfo.point.y;
 
-        // go under ground 
-        spawnPosition.y -= 1f;
+        // TODO: go under ground instead
+        //spawnPosition.y -= 1f;
 
         Item chosenItem = GetItemToSpawn();
         ItemObject spawnedItem = Instantiate(chosenItem.objectPrefab, spawnPosition, Quaternion.identity);
@@ -98,5 +98,11 @@ public class Spawner : MonoBehaviour
     private void OnItemDestroyed(ItemObject itemObject)
     {
         spawnedItems.Remove(itemObject);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireCube(spawnerArea.bounds.center, spawnerArea.bounds.size);
     }
 }
