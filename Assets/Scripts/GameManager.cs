@@ -33,15 +33,15 @@ public class GameManager : MonoBehaviour
         inventory = FindFirstObjectByType<Inventory>();
         metalDetector = FindFirstObjectByType<MetalDetector>();
 
-        upgrades.Add(new UpgradeData { upgrade = Upgrade.Battery, name = "Battery Upgrade", cost = 1f });
-        upgrades.Add(new UpgradeData { upgrade = Upgrade.Range, name = "Range Upgrade", cost = 1f });
-        upgrades.Add(new UpgradeData { upgrade = Upgrade.Backpack, name = "Backpack Upgrade", cost = 1f });
-        upgrades.Add(new UpgradeData { upgrade = Upgrade.WalletSize, name = "Wallet Size", cost = 1f });
-        upgrades.Add(new UpgradeData { upgrade = Upgrade.Rarity, name = "Rarity Boost", cost = 1f });
-        upgrades.Add(new UpgradeData { upgrade = Upgrade.GoldDetector, name = "Gold Detector", cost = 1f });
-        upgrades.Add(new UpgradeData { upgrade = Upgrade.HeartbeatSensor, name = "Heartbeat Sensor", cost = 1f });
-        upgrades.Add(new UpgradeData { upgrade = Upgrade.Fossils, name = "Fossil Finder", cost = 1f });
-        upgrades.Add(new UpgradeData { upgrade = Upgrade.AlienTech, name = "Alien Tech", cost = 1f });
+        upgrades.Add(new UpgradeData { upgrade = Upgrade.Battery,           name = "Battery Upgrade",   cost = 1f });
+        upgrades.Add(new UpgradeData { upgrade = Upgrade.Range,             name = "Range Upgrade",     cost = 1f });
+        upgrades.Add(new UpgradeData { upgrade = Upgrade.Backpack,          name = "Backpack Upgrade",  cost = 1f });
+        upgrades.Add(new UpgradeData { upgrade = Upgrade.WalletSize,        name = "Wallet Size",       cost = 1f });
+        upgrades.Add(new UpgradeData { upgrade = Upgrade.Rarity,            name = "Rarity Boost",      cost = 1f });
+        //upgrades.Add(new UpgradeData { upgrade = Upgrade.GoldDetector,      name = "Gold Detector",     cost = 1f });
+        //upgrades.Add(new UpgradeData { upgrade = Upgrade.HeartbeatSensor,   name = "Heartbeat Sensor",  cost = 1f });
+        //upgrades.Add(new UpgradeData { upgrade = Upgrade.Fossils,           name = "Fossil Finder",     cost = 1f });
+        //upgrades.Add(new UpgradeData { upgrade = Upgrade.AlienTech,         name = "Alien Tech",        cost = 1f });
 
         SetLocked(false);
     }

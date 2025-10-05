@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -31,17 +32,24 @@ public class Shop : MonoBehaviour
         return GameManager.Instance.inventory.SellAll();
     }
 
-    private void BuyUpgrade(ref UpgradeData upgradeData) 
+    public void BuyUpgrade(UpgradeData upgradeData) 
     {
-        if(GameManager.Instance.inventory.GetMoney() >= upgradeData.cost)
-        {
-            GameManager.Instance.inventory.DeductMoney(upgradeData.cost);
-            upgradeData.cost *= 1.5f; // increase cost for next time
+        if (GameManager.Instance.inventory.GetMoney() < upgradeData.cost)
+            return;
 
-            ApplyUpgrade(upgradeData.upgrade);
+        GameManager.Instance.inventory.DeductMoney(upgradeData.cost);
+
+        for (int i = 0; i < GameManager.Instance.upgrades.Count; i++)
+        {
+            if (GameManager.Instance.upgrades[i].upgrade == upgradeData.upgrade)
+            {
+                UpgradeData temp = GameManager.Instance.upgrades[i];
+                temp.cost *= 1.5f; // increase for next time
+                GameManager.Instance.upgrades[i] = temp;
+            }
         }
 
-        Debug.Log(GameManager.Instance.inventory.GetMoney() + " Unable to afford upgrade. Better luck next time!");  
+        ApplyUpgrade(upgradeData.upgrade);  
     }
 
     private void ApplyUpgrade(Upgrade upgrade)
