@@ -99,4 +99,10 @@ public class Spawner : MonoBehaviour
     {
         spawnedItems.Remove(itemObject);
     }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireCube(spawnerArea.bounds.center, spawnerArea.bounds.size);
+    }
 }
