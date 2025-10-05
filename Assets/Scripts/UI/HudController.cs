@@ -35,4 +35,9 @@ public class HudController : MonoBehaviour
 
         shopPanel.gameObject.SetActive(true);
     }
+
+    public void ShowInteractPrompt(bool show)
+    {
+        interactPrompt.SetActive(show);
+    }
 }

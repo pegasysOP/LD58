@@ -5,6 +5,9 @@ using UnityEngine.InputSystem;
 
 public class Shop : MonoBehaviour
 {
+    public LayerMask shopMask;
+    public float range = 3f;
+
     private Keyboard keyboard;
     private Spawner spawner;
 
@@ -17,7 +20,21 @@ public class Shop : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        // TODO: make this have to interact with shop object
+        if (GameManager.Instance.LOCKED)
+        {
+            GameManager.Instance.hudController.ShowInteractPrompt(false);
+            return;
+        }
+
+        Physics.Raycast(GameManager.Instance.cameraController.playerCamera.transform.position, GameManager.Instance.cameraController.playerCamera.transform.forward, out RaycastHit hitInfo, range, shopMask);
+        if (hitInfo.collider == null)
+        {
+            GameManager.Instance.hudController.ShowInteractPrompt(false);
+            return;
+        }
+
+        GameManager.Instance.hudController.ShowInteractPrompt(true);
+
         if (keyboard.eKey.wasPressedThisFrame)
             OpenShop();;
     }
