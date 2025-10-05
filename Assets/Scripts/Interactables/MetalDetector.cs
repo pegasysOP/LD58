@@ -56,8 +56,13 @@ public class MetalDetector : MonoBehaviour
     public void Detect()
     {
         battery -= dischargeRate * Time.deltaTime;
-        if (battery <= 0f) 
+        GameManager.Instance.hudController.UpdateBatteryText(battery);
+        if (battery <= 0f)
+        {
+            battery = 0f;
             return;
+        }
+            
 
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, range, metalDetectionMask);
         
