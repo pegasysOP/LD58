@@ -48,15 +48,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   range: 5
+  maxAngle: 90
   metalDetectionMask:
     serializedVersion: 2
     m_Bits: 4096
   maxBattery: 100
   dischargeRate: 0
-  metalDetectorBeep: {fileID: 8300000, guid: ac6ff30c51f4f3f4a8659451551529be, type: 3}
+  metalDetectorBeep: {fileID: 8300000, guid: 0b08e14f6a8c646cf9f83136e127cb8a, type: 3}
   minPitch: 0.8
   maxPitch: 2
-  beepInterval: 0.5
 --- !u!114 &7791059756583843612
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -85,6 +85,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Inventory
   maxSize: 2
+  maxMoney: 1000
 --- !u!82 &8897566486306300713
 AudioSource:
   m_ObjectHideFlags: 0
@@ -98,7 +99,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.75
   m_Pitch: 1
   Loop: 0
   Mute: 0
