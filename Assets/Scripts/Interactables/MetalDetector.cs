@@ -59,6 +59,13 @@ public class MetalDetector : MonoBehaviour
     {
         DischargeBattery();
 
+        // don't detect if looking above horizontal
+        if (Camera.main.transform.forward.y > 0)
+        {
+            beepTimer = 0f;
+            return;
+        }
+
         Vector3 detectionPoint = transform.position + transform.forward * 0.4f; // just in front of player
 
         Collider[] hitColliders = Physics.OverlapSphere(detectionPoint, range, metalDetectionMask);
