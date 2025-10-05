@@ -86,4 +86,8 @@ public class Inventory : MonoBehaviour
         GameManager.Instance.hudController.UpdateMoneyText(money);
     }
 
+    public bool IsFull()
+    {
+        return items.Count >= maxSize;
+    }
 }
