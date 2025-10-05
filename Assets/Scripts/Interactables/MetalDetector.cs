@@ -8,6 +8,7 @@ public class MetalDetector : MonoBehaviour
 {
     [Header("Detection Settings")]
     public float range = 2f;
+    public float ignoreAngleRange = 0.5f;
     public float maxAngle = 90f;
     public LayerMask metalDetectionMask;
 
@@ -57,15 +58,8 @@ public class MetalDetector : MonoBehaviour
 
     public void Detect()
     {
-        battery -= dischargeRate * Time.deltaTime;
-        GameManager.Instance.hudController.UpdateBatteryText(battery);
-        if (battery <= 0f)
-        {
-            battery = 0f;
-            return;
-        }
+        DischargeBattery();
             
-
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, range, metalDetectionMask);
         
         if (hitColliders.Length == 0)
@@ -81,8 +75,17 @@ public class MetalDetector : MonoBehaviour
         .Where(hit =>
         {
             Vector3 directionToTarget = (hit.transform.position - transform.position).normalized;
+            float distance = Vector3.Distance(transform.position, hit.transform.position);
+
             float angle = Vector3.Angle(forward, directionToTarget);
-            return angle <= maxAngle || Vector3.Distance(transform.position, hit.transform.position) < 0.5f;
+            float normalisedAngle = 1 - Mathf.Clamp01(angle / maxAngle);
+            
+            if(distance > 1)
+            {
+                audioSource.pitch = Mathf.Lerp(minPitch, maxPitch, normalisedAngle);
+
+            }
+            return angle <= maxAngle || distance < ignoreAngleRange;
         })
         .ToList();
 
@@ -116,7 +119,7 @@ public class MetalDetector : MonoBehaviour
         if (audioSource == null || metalDetectorBeep == null)
             return;
 
-        audioSource.pitch = Mathf.Lerp(minPitch, maxPitch, proximity);
+        
         if(proximity >= 0.75f)
         {
             audioSource.Stop();
@@ -130,5 +133,16 @@ public class MetalDetector : MonoBehaviour
             
         AudioManager.Instance.StartDuckAudio(AudioManager.Instance.musicSource, 0.1f, 0.5f, 0.5f);
 
+    }
+
+    void DischargeBattery()
+    {
+        battery -= dischargeRate * Time.deltaTime;
+        GameManager.Instance.hudController.UpdateBatteryText(battery);
+        if (battery <= 0f)
+        {
+            battery = 0f;
+            return;
+        }
     }
 }
