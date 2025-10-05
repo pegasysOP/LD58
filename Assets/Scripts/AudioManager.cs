@@ -18,6 +18,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip waveClip;
     public List<AudioClip> coinClips;
     public List<AudioClip> digSandClips;
+    public List<AudioClip> walkingClips;
 
     [Header("Interaction")]
     public AudioClip selectClip;

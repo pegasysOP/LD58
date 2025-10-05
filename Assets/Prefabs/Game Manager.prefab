@@ -85,6 +85,12 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 839764df8a6d248ae867bc30769adc31, type: 3}
   - {fileID: 8300000, guid: 841e22c78d3754687b2f0eae1d6540db, type: 3}
   - {fileID: 8300000, guid: 79a641ff5c0e94eb3bea6fd03331f19e, type: 3}
+  walkingClips:
+  - {fileID: 8300000, guid: 6d9e0c86f1d1b43c3959be6e56997089, type: 3}
+  - {fileID: 8300000, guid: f7e749efc9b9d46abb942ecb9eadbe3e, type: 3}
+  - {fileID: 8300000, guid: bf0626af452fe44478d0912061a267dd, type: 3}
+  - {fileID: 8300000, guid: c96df748911d340848b41127019a99e9, type: 3}
+  - {fileID: 8300000, guid: b525c4492b4f64b6799b8072b5b545a8, type: 3}
   selectClip: {fileID: 0}
   selectBlockedClip: {fileID: 0}
   menuMusicClip: {fileID: 0}

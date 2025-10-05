@@ -21,6 +21,9 @@ public class PlayerController : MonoBehaviour
 
     private Keyboard keyboard;
 
+    private float movementTimer = 0.5f;
+    private float movementDelay = 0.5f;
+
     private void Start()
     {
         if (GameManager.Instance.playerController)
@@ -32,6 +35,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        movementTimer -= Time.deltaTime;
         if (GameManager.Instance.LOCKED)
         {
             inputDir = Vector3.zero;
@@ -61,6 +65,12 @@ public class PlayerController : MonoBehaviour
         float velocityX = Mathf.Clamp(moveDir.x * moveSpeed, -maxVelocity, maxVelocity);
         float velocityZ = Mathf.Clamp(moveDir.z * moveSpeed, -maxVelocity, maxVelocity);
         Vector3 targetVelocity = new Vector3(velocityX, rb.linearVelocity.y, velocityZ);
+
+        if (inputDir != Vector3.zero && movementTimer <= 0)
+        {
+            AudioManager.Instance.PlaySfxWithPitchShifting(AudioManager.Instance.walkingClips);
+            movementTimer = movementDelay;
+        }
 
         float currentAcceleration = groundDetector.IsGrounded ? moveAcceleration : airAcceleration;
         rb.linearVelocity = Vector3.Lerp(rb.linearVelocity, targetVelocity, currentAcceleration * Time.deltaTime);
