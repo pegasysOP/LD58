@@ -5,10 +5,12 @@ using UnityEngine.InputSystem;
 public class Shop : MonoBehaviour
 {
     private Keyboard keyboard;
+    private Spawner spawner;
 
     private void Start()
     {
         keyboard = Keyboard.current;
+        spawner = FindFirstObjectByType<Spawner>();
     }
 
     // Update is called once per frame
@@ -71,7 +73,18 @@ public class Shop : MonoBehaviour
                 break;
 
             case Upgrade.Rarity:
-                Debug.LogError("Upgrade " + upgrade.ToString() + " is not yet implemented");
+                foreach(Item item in spawner.items)
+                {
+                    //TODO: We probably want to do this in a better way
+                    if(item.rarity == 1)
+                    {
+                        item.rarity *= 2;
+                    }
+                    else
+                    {
+                        item.rarity /= 2;
+                    }
+                }
                 break;
 
             case Upgrade.GoldDetector:
