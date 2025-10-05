@@ -1,4 +1,3 @@
-using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
@@ -7,30 +6,29 @@ using System.Collections.Generic;
 public class MetalDetector : MonoBehaviour
 {
     [Header("Detection Settings")]
-    public float range = 2f;
-    public float ignoreAngleRange = 0.5f;
+    public float range = 5f;
+    public float ignoreAngleRange = 1.0f;
     public float maxAngle = 90f;
     public LayerMask metalDetectionMask;
 
     [Header("Battery Settings")]
     public float maxBattery = 100f;
-    public float dischargeRate = 10f;
+    public float dischargeRate = 0f;
     private float battery;
 
     [Header("Audio Settings")]
     public AudioClip metalDetectorBeep;
-    public AudioClip foundMetalDetectorBeep;
-    public float minPitch = 0.8f;
-    public float maxPitch = 2.0f;
-    private float minBeepInterval = 0.2f;
-    private float maxBeepInterval = 0.5f;
-    private float beepInterval = 0.5f;
+    public float minPitch = 0.6f;
+    public float maxPitch = 1.4f;
+    public float minBeepInterval = 0.08f;
+    public float maxBeepInterval = 0.6f;
+    private float beepInterval = 0.6f;
 
     private float beepTimer = 0f;
     private Mouse mouse;
     private AudioSource audioSource;
 
-    void Start()
+    private void Start()
     {
         mouse = Mouse.current;
         audioSource = GetComponent<AudioSource>();
@@ -39,11 +37,12 @@ public class MetalDetector : MonoBehaviour
         battery = maxBattery;
     }
 
-    void Update()
+    private void Update()
     {
+        beepTimer += Time.deltaTime;
+
         if (GameManager.Instance.LOCKED)
             return;
-
 
         if (mouse.rightButton.isPressed)
         {
@@ -60,69 +59,56 @@ public class MetalDetector : MonoBehaviour
     {
         DischargeBattery();
 
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, range, metalDetectionMask);
-        if (hitColliders.Length == 0)
+        Vector3 detectionPoint = transform.position + transform.forward * 0.4f; // just in front of player
+
+        Collider[] hitColliders = Physics.OverlapSphere(detectionPoint, range, metalDetectionMask);
+        if (hitColliders.Length < 1)
         {
             beepTimer = 0f;
             return;
         }
 
-        Vector3 forward = Camera.main.transform.forward;
-        Vector2 forward2D = new Vector2(forward.x, forward.z).normalized;
+        Vector2 lookDir = new Vector2(Camera.main.transform.forward.x, Camera.main.transform.forward.z).normalized;
 
-        List<Collider> validTargets = hitColliders
-            .Where(hit =>
+        bool foundTarget = false;
+        float closestDistance = float.MaxValue;
+        float closestAngle = float.MaxValue;
+
+        foreach (Collider hit in hitColliders)
+        {
+            Vector2 targetVector = new Vector2(hit.transform.position.x - detectionPoint.x,
+                                               hit.transform.position.z - detectionPoint.z);
+
+            float distance = targetVector.magnitude;
+            float horizontalAngle = Vector2.Angle(lookDir, targetVector.normalized);
+
+            bool isValid = horizontalAngle <= maxAngle || distance < ignoreAngleRange;
+            if (!isValid)
+                continue;
+
+            if (distance < closestDistance)
             {
-                Vector2 target2D = new Vector2(hit.transform.position.x - transform.position.x,
-                                               hit.transform.position.z - transform.position.z);
-                float distance2D = target2D.magnitude;
+                closestDistance = distance;
+                closestAngle = Vector2.Angle(lookDir, targetVector.normalized);
+                foundTarget = true;
+            }
+        }
 
-                float horizontalAngle = Vector2.Angle(forward2D, target2D.normalized);
-
-                return horizontalAngle <= maxAngle || distance2D < ignoreAngleRange;
-            })
-            .ToList();
-
-        if (validTargets.Count == 0)
+        if (!foundTarget)
         {
             beepTimer = 0f;
             return;
         }
 
-        Collider closestTarget = validTargets
-            .OrderBy(hit =>
-            {
-                Vector2 target2D = new Vector2(hit.transform.position.x - transform.position.x,
-                                               hit.transform.position.z - transform.position.z);
-                return target2D.magnitude;
-            })
-            .First();
-
-        Vector2 closestTarget2D = new Vector2(closestTarget.transform.position.x - transform.position.x,
-                                              closestTarget.transform.position.z - transform.position.z);
-        float closestDistance2D = closestTarget2D.magnitude;
-
-        float proximity = Mathf.Clamp01(1f - (closestDistance2D / range));
+        float proximity = Mathf.Clamp01(1f - (closestDistance / (closestAngle < maxAngle ? range : ignoreAngleRange)));
         beepInterval = Mathf.Lerp(maxBeepInterval, minBeepInterval, proximity);
 
- 
-        float horizontalAngleToTarget = Vector2.Angle(forward2D, closestTarget2D.normalized);
-        if (closestDistance2D > ignoreAngleRange)
-        {
-            float normalizedAngle = 1f - Mathf.Clamp01(horizontalAngleToTarget / maxAngle);
-            float exponent = 2f;
-            float curvedAngle = Mathf.Pow(normalizedAngle, exponent);
+        float angleProximity = 1f - Mathf.Clamp01(closestAngle / maxAngle);
+        float curvedAngle = Mathf.Pow(angleProximity, 2f);
+        audioSource.pitch = closestDistance < ignoreAngleRange ? maxPitch : Mathf.Lerp(minPitch, maxPitch, curvedAngle);
 
-            audioSource.pitch = Mathf.Lerp(minPitch, maxPitch, curvedAngle);
-        }
-        else
-        {
-            audioSource.pitch = maxPitch;
-        }
+        Debug.Log($"Pitch: {audioSource.pitch:F2} | Horizontal Angle: {closestAngle:F1}ï¿½ | Horizontal Distance: {closestDistance:F2}");
 
-        Debug.Log($"Pitch: {audioSource.pitch:F2} | Horizontal Angle: {horizontalAngleToTarget:F1}° | Horizontal Distance: {closestDistance2D:F2}");
-
-        beepTimer += Time.deltaTime;
         if (beepTimer >= beepInterval)
         {
             PlayBeep(proximity);
@@ -130,29 +116,20 @@ public class MetalDetector : MonoBehaviour
         }
     }
 
-    void PlayBeep(float proximity)
+    private void PlayBeep(float proximity)
     {
-        Debug.Log("Proximity: " + proximity);
         if (audioSource == null || metalDetectorBeep == null)
             return;
 
-        
-        if(proximity >= 0.75f)
-        {
-            audioSource.Stop();
-            audioSource.PlayOneShot(foundMetalDetectorBeep);
-        }
-        else
-        {
-            audioSource.Stop();
-            audioSource.PlayOneShot(metalDetectorBeep);
-        }
-            
+        audioSource.Stop();
+        audioSource.clip = metalDetectorBeep;
+        audioSource.Play();
+
         AudioManager.Instance.StartDuckAudio(AudioManager.Instance.musicSource, 0.1f, 0.5f, 0.5f);
 
     }
 
-    void DischargeBattery()
+    private void DischargeBattery()
     {
         battery -= dischargeRate * Time.deltaTime;
         GameManager.Instance.hudController.UpdateBatteryText(battery);

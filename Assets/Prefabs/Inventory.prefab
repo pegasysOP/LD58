@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   range: 5
-  ignoreAngleRange: 0.5
+  ignoreAngleRange: 0.8
   maxAngle: 90
   metalDetectionMask:
     serializedVersion: 2
@@ -56,9 +56,10 @@ MonoBehaviour:
   maxBattery: 100
   dischargeRate: 0
   metalDetectorBeep: {fileID: 8300000, guid: 72d60790c61e7496fa484b2682840ae9, type: 3}
-  foundMetalDetectorBeep: {fileID: 8300000, guid: 02c182c2b5a614f53927c476f304e458, type: 3}
-  minPitch: 1
-  maxPitch: 1.25
+  minPitch: 0.6
+  maxPitch: 1.4
+  minBeepInterval: 0.08
+  maxBeepInterval: 0.6
 --- !u!114 &7791059756583843612
 MonoBehaviour:
   m_ObjectHideFlags: 0
