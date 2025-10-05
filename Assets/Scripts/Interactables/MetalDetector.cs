@@ -59,53 +59,57 @@ public class MetalDetector : MonoBehaviour
     public void Detect()
     {
         DischargeBattery();
-            
+
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, range, metalDetectionMask);
-        
         if (hitColliders.Length == 0)
         {
             beepTimer = 0f;
             return;
         }
 
-        Vector3 forward = transform.forward;
-        
-        //Get all targets less than max angle from players forward direction 
+        Vector3 forward = Camera.main.transform.forward;
+
         List<Collider> validTargets = hitColliders
-        .Where(hit =>
-        {
-            Vector3 directionToTarget = (hit.transform.position - transform.position).normalized;
-            float distance = Vector3.Distance(transform.position, hit.transform.position);
-
-            float angle = Vector3.Angle(forward, directionToTarget);
-            float normalisedAngle = 1 - Mathf.Clamp01(angle / maxAngle);
-            
-            if(distance > 1)
+            .Where(hit =>
             {
-                audioSource.pitch = Mathf.Lerp(minPitch, maxPitch, normalisedAngle);
-
-            }
-            return angle <= maxAngle || distance < ignoreAngleRange;
-        })
-        .ToList();
+                Vector3 directionToTarget = (hit.transform.position - transform.position).normalized;
+                float angle = Vector3.Angle(forward, directionToTarget);
+                float distance = Vector3.Distance(transform.position, hit.transform.position);
+                return angle <= maxAngle || distance < ignoreAngleRange;
+            })
+            .ToList();
 
         if (validTargets.Count == 0)
         {
             beepTimer = 0f;
             return;
         }
-        
-        //Ensure valid targets are within range 
-        float closestDistance = hitColliders
-            .Select(hit => Vector3.Distance(transform.position, hit.transform.position))
-            .Min();
+
+        Collider closestTarget = validTargets
+            .OrderBy(hit => Vector3.Distance(transform.position, hit.transform.position))
+            .First();
+
+        float closestDistance = Vector3.Distance(transform.position, closestTarget.transform.position);
 
         float proximity = Mathf.Clamp01(1f - (closestDistance / range));
         beepInterval = Mathf.Lerp(maxBeepInterval, minBeepInterval, proximity);
-        Debug.Log(beepInterval);
+
+        Vector3 direction = (closestTarget.transform.position - transform.position).normalized;
+        float angleToTarget = Vector3.Angle(forward, direction);
+
+        if (closestDistance > ignoreAngleRange)
+        {
+            float normalizedAngle = 1f - Mathf.Clamp01(angleToTarget / maxAngle);
+            audioSource.pitch = Mathf.Lerp(minPitch, maxPitch, normalizedAngle);
+        }
+        else
+        {
+            audioSource.pitch = maxPitch;
+        }
+
+        Debug.Log($"Pitch: {audioSource.pitch:F2} | Angle: {angleToTarget:F1}° | Distance: {closestDistance:F2}");
 
         beepTimer += Time.deltaTime;
-
         if (beepTimer >= beepInterval)
         {
             PlayBeep(proximity);
