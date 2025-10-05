@@ -33,7 +33,7 @@ public class Radio : MonoBehaviour
         if (keyboard.mKey.wasPressedThisFrame)
         {
             currentSongIndex = (currentSongIndex + 1) % playlist.Count;
-            //AudioManager.Instance.PlayMusic(playlist[currentSongIndex], AudioManager.FadeType.CrossFade);
+            AudioManager.Instance.PlayMusic(playlist[currentSongIndex], AudioManager.FadeType.FadeIn);
         }
     }
 }
