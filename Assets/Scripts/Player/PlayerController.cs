@@ -14,6 +14,9 @@ public class PlayerController : MonoBehaviour
     public float jumpForce;
     public float airAcceleration;
 
+    [Header("Animation")]
+    public Animator animator;
+
     [Header("Debug")]
     public Vector3 inputDir;
     public float speedDebug;
@@ -43,7 +46,15 @@ public class PlayerController : MonoBehaviour
         }
 
         if (keyboard != null && keyboard.spaceKey.wasPressedThisFrame && groundDetector.IsGrounded)
+        {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            //animator.SetBool("isJumping", true);
+        }
+
+        if (groundDetector.IsGrounded)
+        {
+            //animator.SetBool("isJumping", false);
+        }
 
         float horizontal = 0f;
         float vertical = 0f;
@@ -66,11 +77,20 @@ public class PlayerController : MonoBehaviour
         float velocityZ = Mathf.Clamp(moveDir.z * moveSpeed, -maxVelocity, maxVelocity);
         Vector3 targetVelocity = new Vector3(velocityX, rb.linearVelocity.y, velocityZ);
 
-        if (inputDir != Vector3.zero && movementTimer <= 0)
+        if (inputDir != Vector3.zero)
         {
-            AudioManager.Instance.PlaySfxWithPitchShifting(AudioManager.Instance.walkingClips);
-            movementTimer = movementDelay;
+            if (movementTimer <= 0)
+            {
+                AudioManager.Instance.PlaySfxWithPitchShifting(AudioManager.Instance.walkingClips);
+                movementTimer = movementDelay;
+            }
+            animator.SetBool("isMoving", true);
         }
+        else
+        {
+            animator.SetBool("isMoving", false);
+        }
+
 
         float currentAcceleration = groundDetector.IsGrounded ? moveAcceleration : airAcceleration;
         rb.linearVelocity = Vector3.Lerp(rb.linearVelocity, targetVelocity, currentAcceleration * Time.deltaTime);
