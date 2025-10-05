@@ -36,7 +36,10 @@ public class Shovel : MonoBehaviour
             interactable.OnInteract();
             bool wasSuccessful = inventory.AddItem(interactable.ItemData);
             if (wasSuccessful)
+            {
+                GameManager.Instance.hudController.UpdateInventory();
                 return;
+            }
         }
     }
 }

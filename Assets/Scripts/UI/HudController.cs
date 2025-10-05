@@ -9,6 +9,7 @@ public class HudController : MonoBehaviour
 
     public TextMeshProUGUI moneyText;
     public TextMeshProUGUI batteryText;
+    public InventoryPanel inventoryPanel;
     public ShopPanel shopPanel;
 
     public void UpdateMoneyText(float money)
@@ -19,7 +20,13 @@ public class HudController : MonoBehaviour
     public void UpdateBatteryText(float battery)
     {
         
-        batteryText.text = battery.ToString(battery + "%");
+        batteryText.text = battery.ToString("F2");
+    }
+
+    public void UpdateInventory()
+    {
+        inventoryPanel.SetInventorySize(GameManager.Instance.inventory.maxSize);
+        inventoryPanel.SetFilledSlots(GameManager.Instance.inventory.GetCurrentSize());
     }
 
     public void ShowShop(Shop shop)

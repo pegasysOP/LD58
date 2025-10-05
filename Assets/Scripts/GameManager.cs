@@ -43,6 +43,10 @@ public class GameManager : MonoBehaviour
         //upgrades.Add(new UpgradeData { upgrade = Upgrade.Fossils,           name = "Fossil Finder",     cost = 1f });
         //upgrades.Add(new UpgradeData { upgrade = Upgrade.AlienTech,         name = "Alien Tech",        cost = 1f });
 
+        hudController.UpdateMoneyText(inventory.GetMoney());
+        hudController.UpdateBatteryText(metalDetector.maxBattery);
+        hudController.UpdateInventory();
+
         SetLocked(false);
     }
 

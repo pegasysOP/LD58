@@ -76,6 +76,8 @@ public class ShopPanel : MonoBehaviour
     {
         currentShop.SellItems();
         RefreshShop();
+
+        GameManager.Instance.hudController.UpdateInventory();
     }
 
     private void OnBuyButtonClick(UpgradeData upgradeData)
