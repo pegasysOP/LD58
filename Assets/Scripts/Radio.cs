@@ -4,8 +4,6 @@ using UnityEngine.InputSystem;
 
 public class Radio : MonoBehaviour
 {
-    AudioManager audioManager;
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private Keyboard keyboard;
     private int currentSongIndex = 0;
@@ -13,14 +11,15 @@ public class Radio : MonoBehaviour
 
     void Start()
     {
-        audioManager = FindFirstObjectByType<AudioManager>();
-        audioManager.PlayMusic(audioManager.hawiiSongClip, AudioManager.FadeType.None);
+        Debug.Log(AudioManager.Instance);
+        AudioManager.Instance.PlayMusic(AudioManager.Instance.hawiiSongClip, AudioManager.FadeType.None);
         keyboard = Keyboard.current;
 
         playlist = new List<AudioClip>()
         {
             AudioManager.Instance.hawiiSongClip,
-            AudioManager.Instance.jazzSongClip
+            AudioManager.Instance.jazzSongClip,
+            AudioManager.Instance.americanaSongClip
         };
 
         AudioManager.Instance.PlayMusic(playlist[currentSongIndex], AudioManager.FadeType.None);

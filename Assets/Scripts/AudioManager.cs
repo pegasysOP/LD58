@@ -29,6 +29,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip gameLostClip;
     public AudioClip hawiiSongClip;
     public AudioClip jazzSongClip;
+    public AudioClip americanaSongClip;
 
     public static AudioManager Instance;
 

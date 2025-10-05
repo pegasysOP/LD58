@@ -54,7 +54,6 @@ MonoBehaviour:
   hudController: {fileID: 0}
   inventory: {fileID: 0}
   metalDetector: {fileID: 0}
-  upgrades: {fileID: 0}
   LOCKED: 0
 --- !u!114 &5786254294602685839
 MonoBehaviour:
@@ -93,6 +92,7 @@ MonoBehaviour:
   gameLostClip: {fileID: 0}
   hawiiSongClip: {fileID: 8300000, guid: 394560921e271a5409a950f39c751d1f, type: 3}
   jazzSongClip: {fileID: 8300000, guid: 0861af11dcfc56f448b29baac4348d9e, type: 3}
+  americanaSongClip: {fileID: 8300000, guid: 8c4dc9669764c4d3e9248663289f56c9, type: 3}
 --- !u!82 &6189494663581875946
 AudioSource:
   m_ObjectHideFlags: 0
