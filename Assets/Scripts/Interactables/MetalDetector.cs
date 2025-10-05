@@ -68,6 +68,8 @@ public class MetalDetector : MonoBehaviour
         }
 
         Vector3 forward = Camera.main.transform.forward;
+        Vector2 forward2D = new Vector2(forward.x, forward.z).normalized;
+
 
         List<Collider> validTargets = hitColliders
             .Where(hit =>
@@ -94,12 +96,14 @@ public class MetalDetector : MonoBehaviour
         float proximity = Mathf.Clamp01(1f - (closestDistance / range));
         beepInterval = Mathf.Lerp(maxBeepInterval, minBeepInterval, proximity);
 
-        Vector3 direction = (closestTarget.transform.position - transform.position).normalized;
-        float angleToTarget = Vector3.Angle(forward, direction);
+        Vector2 target2D = new Vector2(closestTarget.transform.position.x - transform.position.x,
+                                       closestTarget.transform.position.z - transform.position.z).normalized;
+
+        float horizontalAngle = Vector2.Angle(forward2D, target2D);
 
         if (closestDistance > ignoreAngleRange)
         {
-            float normalizedAngle = 1f - Mathf.Clamp01(angleToTarget / maxAngle);
+            float normalizedAngle = 1f - Mathf.Clamp01(horizontalAngle / maxAngle);
             float exponent = 2f;
             float curvedAngle = Mathf.Pow(normalizedAngle, exponent);
 
@@ -110,7 +114,7 @@ public class MetalDetector : MonoBehaviour
             audioSource.pitch = maxPitch;
         }
 
-        Debug.Log($"Pitch: {audioSource.pitch:F2} | Angle: {angleToTarget:F1}° | Distance: {closestDistance:F2}");
+        Debug.Log($"Pitch: {audioSource.pitch:F2} | Angle: {horizontalAngle:F1}° | Distance: {closestDistance:F2}");
 
         beepTimer += Time.deltaTime;
         if (beepTimer >= beepInterval)
