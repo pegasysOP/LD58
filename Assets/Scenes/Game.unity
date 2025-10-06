@@ -1093,10 +1093,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6676869392133357304, guid: 7071210b99b3bc14c918a1782f63a0a1, type: 3}
-      propertyPath: m_Layer
-      value: 14
-      objectReference: {fileID: 0}
     - target: {fileID: 6772422307868974210, guid: 7071210b99b3bc14c918a1782f63a0a1, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -4070,7 +4066,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1782707436106725030, guid: fd7b04d50cc5d9842bb77ce3ff67b8f8, type: 3}
       propertyPath: dischargeRate
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6157617304416577436, guid: fd7b04d50cc5d9842bb77ce3ff67b8f8, type: 3}
       propertyPath: m_Enabled

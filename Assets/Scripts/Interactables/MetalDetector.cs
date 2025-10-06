@@ -25,6 +25,9 @@ public class MetalDetector : MonoBehaviour
     public float maxBeepInterval = 0.6f;
     private float beepInterval = 0.6f;
 
+    [Header("Animation")]
+    public Animator animator;
+
     private float beepTimer = 0f;
     private Mouse mouse;
     private AudioSource audioSource;
@@ -51,6 +54,7 @@ public class MetalDetector : MonoBehaviour
         }
         else
         {
+            animator.SetBool("isDetecting", false);
             beepTimer = 0f;
             audioSource.Stop();
             RechargeBatteryOverTime();
@@ -63,6 +67,7 @@ public class MetalDetector : MonoBehaviour
 
         if(battery <= 0f)
         {
+            animator.SetBool("isDetecting", false);
             return;
         }
 
@@ -70,9 +75,11 @@ public class MetalDetector : MonoBehaviour
         if (Camera.main.transform.forward.y > 0)
         {
             beepTimer = 0f;
+            animator.SetBool("isDetecting", false);
             return;
         }
 
+        animator.SetBool("isDetecting", true);
         Vector3 detectionPoint = transform.position + transform.forward * 0.4f; // just in front of player
 
         Collider[] hitColliders = Physics.OverlapSphere(detectionPoint, range, metalDetectionMask);
@@ -110,6 +117,7 @@ public class MetalDetector : MonoBehaviour
 
         if (!foundTarget)
         {
+            animator.SetBool("isDetecting", false);
             beepTimer = 0f;
             return;
         }
@@ -120,6 +128,7 @@ public class MetalDetector : MonoBehaviour
         float angleProximity = 1f - Mathf.Clamp01(closestAngle / maxAngle);
         float curvedAngle = Mathf.Pow(angleProximity, 2f);
         audioSource.pitch = closestDistance < ignoreAngleRange ? maxPitch : Mathf.Lerp(minPitch, maxPitch, curvedAngle);
+        
 
         Debug.Log($"Pitch: {audioSource.pitch:F2} | Horizontal Angle: {closestAngle:F1}� | Horizontal Distance: {closestDistance:F2}");
 
