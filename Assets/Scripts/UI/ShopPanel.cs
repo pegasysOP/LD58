@@ -84,5 +84,7 @@ public class ShopPanel : MonoBehaviour
     {
         currentShop.BuyUpgrade(upgradeData);
         RefreshShop();
+
+        GameManager.Instance.hudController.UpdateInventory();
     }
 }
