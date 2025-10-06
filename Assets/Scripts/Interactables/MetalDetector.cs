@@ -117,7 +117,6 @@ public class MetalDetector : MonoBehaviour
 
         if (!foundTarget)
         {
-            animator.SetBool("isDetecting", false);
             beepTimer = 0f;
             return;
         }
@@ -128,7 +127,6 @@ public class MetalDetector : MonoBehaviour
         float angleProximity = 1f - Mathf.Clamp01(closestAngle / maxAngle);
         float curvedAngle = Mathf.Pow(angleProximity, 2f);
         audioSource.pitch = closestDistance < ignoreAngleRange ? maxPitch : Mathf.Lerp(minPitch, maxPitch, curvedAngle);
-        
 
         Debug.Log($"Pitch: {audioSource.pitch:F2} | Horizontal Angle: {closestAngle:F1}� | Horizontal Distance: {closestDistance:F2}");
 
