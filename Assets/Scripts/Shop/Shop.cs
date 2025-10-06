@@ -60,6 +60,7 @@ public class Shop : MonoBehaviour
         switch (upgradeData.upgrade)
         {
             case Upgrade.SilverDetector:
+            case Upgrade.SolarPanel:
             case Upgrade.GoldDetector:
                 GameManager.Instance.RemoveUpgrade(upgradeData.upgrade);
                 break;
