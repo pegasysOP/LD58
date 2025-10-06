@@ -50,6 +50,17 @@ public class AudioManager : MonoBehaviour
         Instance = this;
         UpdateVolume(SettingsUtils.GetMasterVolume());
         Play(sfxSource, waveClip);
+
+        AudioClip[] clipsToWarm = { hawiiSongClip, jazzSongClip, americanaSongClip };
+        foreach (AudioClip clip in clipsToWarm)
+        {
+            if (clip != null && musicSource != null)
+            {
+                musicSource.clip = clip;
+                musicSource.Play();
+                musicSource.Stop();
+            }
+        }
     }
 
     //==================== Utility ====================
