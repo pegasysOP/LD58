@@ -34,6 +34,13 @@ public class Shovel : MonoBehaviour
 
     public void Dig()
     {
+        Camera camera = GameManager.Instance.cameraController.playerCamera;
+        Vector3 direction = camera.transform.forward;
+
+        float angleFromDown = Vector3.Angle(direction, Vector3.down);
+        if (angleFromDown > 60f)
+            return;
+
         Physics.Raycast(GameManager.Instance.cameraController.playerCamera.transform.position, GameManager.Instance.cameraController.playerCamera.transform.forward, out RaycastHit hitInfo, range, interactableMask);
         IInteractable interactable= hitInfo.collider?.GetComponent<IInteractable>();
         if (interactable == null)
