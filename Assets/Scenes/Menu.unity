@@ -1241,6 +1241,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 11
       objectReference: {fileID: 0}
+    - target: {fileID: 4032285237506184186, guid: 7071210b99b3bc14c918a1782f63a0a1, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4444104183089674743, guid: 7071210b99b3bc14c918a1782f63a0a1, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -1316,6 +1320,10 @@ PrefabInstance:
     - target: {fileID: 7066175225138876321, guid: 7071210b99b3bc14c918a1782f63a0a1, type: 3}
       propertyPath: m_Layer
       value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 7664053727202323456, guid: 7071210b99b3bc14c918a1782f63a0a1, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7664053727202323456, guid: 7071210b99b3bc14c918a1782f63a0a1, type: 3}
       propertyPath: spawners.Array.size
