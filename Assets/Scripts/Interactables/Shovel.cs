@@ -41,34 +41,28 @@ public class Shovel : MonoBehaviour
         if (angleFromDown > 60f)
             return;
 
-        Physics.Raycast(GameManager.Instance.cameraController.playerCamera.transform.position, GameManager.Instance.cameraController.playerCamera.transform.forward, out RaycastHit hitInfo, range, interactableMask);
-        IInteractable interactable= hitInfo.collider?.GetComponent<IInteractable>();
-        if (interactable == null)
+        // check for item
+        if (Physics.Raycast(GameManager.Instance.cameraController.playerCamera.transform.position, GameManager.Instance.cameraController.playerCamera.transform.forward, out RaycastHit hitInfo, range, interactableMask))
         {
-            Physics.Raycast(GameManager.Instance.cameraController.playerCamera.transform.position, GameManager.Instance.cameraController.playerCamera.transform.forward, out hitInfo, range, groundMask);
-            if (hitInfo.collider == null)
+            IInteractable interactable = hitInfo.collider?.GetComponent<IInteractable>();
+            if (interactable != null)
+            {
+                interactable.OnInteract();
                 return;
-
+            }
+            else
+            {
+                Debug.LogWarning("Hit an interactable layer object without IInteractable component.");
+            }
+        }
+        
+        if (Physics.Raycast(GameManager.Instance.cameraController.playerCamera.transform.position, GameManager.Instance.cameraController.playerCamera.transform.forward, out hitInfo, range, groundMask))
+        {
             ParticleSystem particles = Instantiate(digParticles, hitInfo.point, Quaternion.identity);
 
             Destroy(particles.gameObject, particles.main.duration + particles.main.startLifetime.constantMax);
             AudioManager.Instance.PlaySfxWithPitchShifting(AudioManager.Instance.digSandClips);
-            return;
-        }
-
-        interactable.OnInteract();
-        return;
-
-        //Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, range, shovelMask);
-        //foreach (Collider hitCollider in hitColliders)
-        //{
-        //    IInteractable interactable = hitCollider.gameObject.GetComponent<IInteractable>();
-        //    if (interactable == null)
-        //        continue;
-        //
-        //    interactable.OnInteract();
-        //    return;
-        //}
+        }        
     }
 
     private void OnDrawGizmos()
