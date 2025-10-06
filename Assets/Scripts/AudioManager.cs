@@ -20,6 +20,7 @@ public class AudioManager : MonoBehaviour
     public List<AudioClip> digSandClips;
     public List<AudioClip> walkingClips;
     public AudioClip seagullClip;
+    public AudioClip staticClip;
 
     [Header("Interaction")]
     public AudioClip selectClip;

@@ -4,11 +4,12 @@ using UnityEngine.InputSystem;
 
 public class Radio : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     private Keyboard keyboard;
     private int currentSongIndex = 0;
     private List<AudioClip> playlist;
     private bool isPlaying = false;
+    private bool waitingForStatic = false;
+
     public LayerMask radioMask;
     public float range = 3f;
 
@@ -17,35 +18,67 @@ public class Radio : MonoBehaviour
         keyboard = Keyboard.current;
     }
 
-    // Update is called once per frame
     void Update()
     {
+        AudioSource musicSource = AudioManager.Instance.musicSource;
+
         if (!isPlaying)
         {
             isPlaying = true;
             CreatePlaylist();
-            AudioManager.Instance.PlayMusic(playlist[currentSongIndex], AudioManager.FadeType.FadeIn, 1f);
+            PlayCurrentSong();
         }
 
-        if (!AudioManager.Instance.musicSource.isPlaying)
+        if (!musicSource.isPlaying && !waitingForStatic)
         {
-            currentSongIndex = (currentSongIndex + 1) % playlist.Count;
-            AudioManager.Instance.PlayMusic(playlist[currentSongIndex], AudioManager.FadeType.FadeIn, 5f);
+            AdvanceSong();
         }
 
-        Physics.Raycast(GameManager.Instance.cameraController.playerCamera.transform.position, GameManager.Instance.cameraController.playerCamera.transform.forward, out RaycastHit hitInfo, range, radioMask);
+        if (waitingForStatic && !musicSource.isPlaying)
+        {
+            waitingForStatic = false;
+            AdvanceSong();
+        }
+
+        Physics.Raycast(GameManager.Instance.cameraController.playerCamera.transform.position,
+                        GameManager.Instance.cameraController.playerCamera.transform.forward,
+                        out RaycastHit hitInfo, range, radioMask);
+
         if (hitInfo.collider == null)
         {
             GameManager.Instance.hudController.ShowRadioPrompt(false);
             return;
         }
         GameManager.Instance.hudController.ShowRadioPrompt(true);
-        
+
         if (keyboard.eKey.wasPressedThisFrame)
         {
-            currentSongIndex = (currentSongIndex + 1) % playlist.Count;
-            AudioManager.Instance.PlayMusic(playlist[currentSongIndex], AudioManager.FadeType.FadeIn, 5f);
+            PlayStaticThenNextSong();
         }
+    }
+
+    void PlayStaticThenNextSong()
+    {
+        if (AudioManager.Instance.staticClip == null)
+        {
+            AdvanceSong();
+            return;
+        }
+
+        waitingForStatic = true;
+        AudioManager.Instance.musicSource.clip = AudioManager.Instance.staticClip;
+        AudioManager.Instance.musicSource.Play();
+    }
+
+    void AdvanceSong()
+    {
+        currentSongIndex = (currentSongIndex + 1) % playlist.Count;
+        PlayCurrentSong();
+    }
+
+    void PlayCurrentSong()
+    {
+        AudioManager.Instance.PlayMusic(playlist[currentSongIndex], AudioManager.FadeType.FadeIn, 1f);
     }
 
     void CreatePlaylist()
