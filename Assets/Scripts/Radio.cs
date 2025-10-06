@@ -9,6 +9,8 @@ public class Radio : MonoBehaviour
     private int currentSongIndex = 0;
     private List<AudioClip> playlist;
     private bool isPlaying = false;
+    public LayerMask radioMask;
+    public float range = 3f;
 
     void Start()
     {
@@ -25,6 +27,14 @@ public class Radio : MonoBehaviour
             AudioManager.Instance.PlayMusic(playlist[currentSongIndex], AudioManager.FadeType.FadeIn, 5f);
         }
 
+        Physics.Raycast(GameManager.Instance.cameraController.playerCamera.transform.position, GameManager.Instance.cameraController.playerCamera.transform.forward, out RaycastHit hitInfo, range, radioMask);
+        if (hitInfo.collider == null)
+        {
+            GameManager.Instance.hudController.ShowRadioPrompt(false);
+            return;
+        }
+        GameManager.Instance.hudController.ShowRadioPrompt(true);
+        
         if (keyboard.mKey.wasPressedThisFrame)
         {
             currentSongIndex = (currentSongIndex + 1) % playlist.Count;

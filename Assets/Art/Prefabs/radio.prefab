@@ -45,6 +45,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3be127a5ab37c64aaa4c7a3ea55f8d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Radio
+  radioMask:
+    serializedVersion: 2
+    m_Bits: 16384
 --- !u!1001 &7599500029440695880
 PrefabInstance:
   m_ObjectHideFlags: 0

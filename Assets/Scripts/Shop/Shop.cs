@@ -23,6 +23,7 @@ public class Shop : MonoBehaviour
         if (GameManager.Instance.LOCKED)
         {
             GameManager.Instance.hudController.ShowInteractPrompt(false);
+            GameManager.Instance.hudController.ShowRadioPrompt(false);
             return;
         }
 
