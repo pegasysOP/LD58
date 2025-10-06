@@ -41,7 +41,10 @@ public class ItemObject : MonoBehaviour, IInteractable
         }
 
         if (GameManager.Instance.inventory.IsFull())
+        {
+            GameManager.Instance.hudController.inventoryPanel.Flash();
             return;
+        }
 
         // collect
         bool wasSuccessful = GameManager.Instance.inventory.AddItem(ItemData);

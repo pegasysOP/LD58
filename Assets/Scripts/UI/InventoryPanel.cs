@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class InventoryPanel : MonoBehaviour
 {
@@ -30,6 +31,18 @@ public class InventoryPanel : MonoBehaviour
                 slots[i].SetFilled(null);
             else
                 slots[i].SetFilled(itemSprites[i]);
+        }
+    }
+
+    public void Flash()
+    {
+        foreach (InventorySlot slot in slots)
+        {
+            slot.filledIcon.DOKill();
+            slot.filledIcon.color = Color.white;
+
+            if (slot.filledIcon.gameObject.activeSelf)
+                slot.filledIcon.DOColor(Color.red, 0.15f).SetLoops(2, LoopType.Yoyo);
         }
     }
 }
