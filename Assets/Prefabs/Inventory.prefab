@@ -72,6 +72,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fa987df30c8a9c4e8ce159039e9e7c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Shovel
+  digParticles: {fileID: 711081720971033458, guid: 98797640debce8e408de072bba6275db, type: 3}
   interactableMask:
     serializedVersion: 2
     m_Bits: 4096

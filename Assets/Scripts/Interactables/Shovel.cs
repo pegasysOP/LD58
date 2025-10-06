@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 
 public class Shovel : MonoBehaviour
 {
+    public ParticleSystem digParticles;
     public LayerMask interactableMask;
     public LayerMask groundMask;
     public float range = 3f;
@@ -33,7 +34,9 @@ public class Shovel : MonoBehaviour
             if (hitInfo.collider == null)
                 return;
 
-            // TODO: put sand particles here if we want them
+            ParticleSystem particles = Instantiate(digParticles, hitInfo.point, Quaternion.identity);
+
+            Destroy(particles.gameObject, particles.main.duration + particles.main.startLifetime.constantMax);
             AudioManager.Instance.PlaySfxWithPitchShifting(AudioManager.Instance.digSandClips);
             return;
         }
