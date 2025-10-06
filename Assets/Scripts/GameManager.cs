@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
         metalDetector = FindFirstObjectByType<MetalDetector>();
 
         upgrades.Add(new UpgradeData { upgrade = Upgrade.Battery,           name = "Battery Upgrade",   cost = 10f });
-        upgrades.Add(new UpgradeData { upgrade = Upgrade.Recharge,          name = "Battery Recharge", cost = 1f });
+        upgrades.Add(new UpgradeData { upgrade = Upgrade.Recharge,          name = "Battery Recharge", cost = 0f });
         upgrades.Add(new UpgradeData { upgrade = Upgrade.SolarPanel,        name = "Solar Recharger", cost = 30f });
 
         upgrades.Add(new UpgradeData { upgrade = Upgrade.Range,             name = "Range Upgrade",     cost = 10f });
