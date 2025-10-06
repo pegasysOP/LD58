@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -48,24 +47,16 @@ public class GameManager : MonoBehaviour
         //upgrades.Add(new UpgradeData { upgrade = Upgrade.Fossils,           name = "Fossil Finder",     cost = 1f });
         //upgrades.Add(new UpgradeData { upgrade = Upgrade.AlienTech,         name = "Alien Tech",        cost = 1f });
 
-        if(SceneManager.GetActiveScene().name == "Game")
-        {
-            hudController.UpdateMoneyText(inventory.GetMoney());
-            hudController.UpdateBatteryText(metalDetector.maxBattery);
-            hudController.UpdateInventory();
-        }
-        else
-        {
-            AudioManager.Instance.PlayMusic(AudioManager.Instance.menuMusicClip);
-        }
-
+        hudController.UpdateMoneyText(inventory.GetMoney());
+        hudController.UpdateBatteryText(metalDetector.maxBattery);
+        hudController.UpdateInventory();
 
         SetLocked(false);
     }
 
     private void Update()
     {
-        if (keyboard.escapeKey.wasPressedThisFrame && SceneManager.GetActiveScene().name == "Game")
+        if (keyboard.escapeKey.wasPressedThisFrame)
         {
             hudController.pauseMenu.Toggle();
         }
