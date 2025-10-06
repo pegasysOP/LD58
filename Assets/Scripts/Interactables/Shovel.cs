@@ -8,6 +8,9 @@ public class Shovel : MonoBehaviour
     public LayerMask groundMask;
     public float range = 3f;
 
+    private float digDelay = 0.3f;
+    private float digTimer = 0.3f;
+   
     private Mouse mouse;
      
     void Start()
@@ -17,11 +20,16 @@ public class Shovel : MonoBehaviour
 
     void Update()
     {
+        digTimer -= Time.deltaTime;
         if (GameManager.Instance.LOCKED)
             return;
 
-        if (mouse.leftButton.wasPressedThisFrame)
+        if (mouse.leftButton.wasPressedThisFrame && digTimer <= 0)
+        {
             Dig();
+            digTimer = digDelay;
+        }
+            
     }
 
     public void Dig()
