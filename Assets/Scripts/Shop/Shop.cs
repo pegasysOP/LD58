@@ -104,7 +104,8 @@ public class Shop : MonoBehaviour
                 break;
 
             case Upgrade.GoldDetector:
-                Debug.LogError("Upgrade " + upgrade.ToString() + " is not yet implemented");
+                spawner.canSpawnGold = true;
+                spawner.ResetSpawns();
                 break;
 
             case Upgrade.HeartbeatSensor:
@@ -117,6 +118,11 @@ public class Shop : MonoBehaviour
 
             case Upgrade.AlienTech:
                 Debug.LogError("Upgrade " + upgrade.ToString() + " is not yet implemented");
+                break;
+
+            case Upgrade.SilverDetector:
+                spawner.canSpawnSilver = true;
+                spawner.ResetSpawns();
                 break;
 
             default:
