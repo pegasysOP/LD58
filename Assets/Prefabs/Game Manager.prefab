@@ -91,6 +91,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: bf0626af452fe44478d0912061a267dd, type: 3}
   - {fileID: 8300000, guid: c96df748911d340848b41127019a99e9, type: 3}
   - {fileID: 8300000, guid: b525c4492b4f64b6799b8072b5b545a8, type: 3}
+  seagullClip: {fileID: 8300000, guid: 6a707dabd915c4152b5cf2904dead6e5, type: 3}
   selectClip: {fileID: 0}
   selectBlockedClip: {fileID: 0}
   menuMusicClip: {fileID: 0}

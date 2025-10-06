@@ -19,6 +19,7 @@ public class AudioManager : MonoBehaviour
     public List<AudioClip> coinClips;
     public List<AudioClip> digSandClips;
     public List<AudioClip> walkingClips;
+    public AudioClip seagullClip;
 
     [Header("Interaction")]
     public AudioClip selectClip;
@@ -37,6 +38,9 @@ public class AudioManager : MonoBehaviour
     private Coroutine currentCoroutine;
 
     private float remainingDuckTime = 0f;
+
+    private float seagullDelay = 15f;
+    private float seagullTimer = 15f;
 
 
     public enum FadeType { None, FadeIn, CrossFade }
@@ -91,6 +95,22 @@ public class AudioManager : MonoBehaviour
             source.clip = clip;
             source.Play();
         }
+    }
+
+    public void Update()
+    {
+        seagullTimer -= Time.deltaTime;
+
+        if(seagullTimer < 0)
+        {
+            PlaySeagullClip();
+            seagullTimer = Random.Range(seagullDelay, seagullDelay * 2f);
+        }
+    }
+
+    public void PlaySeagullClip()
+    {
+        sfxSource.PlayOneShot(seagullClip);
     }
 
     public void Stop(AudioSource source, bool fadeOutEnabled = false, float fadeTime = 2f)
