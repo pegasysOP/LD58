@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public HudController hudController;
 
     public Inventory inventory;
+    public ItemCollection itemCollection;
     public MetalDetector metalDetector;
     public List<UpgradeData> upgrades = new List<UpgradeData>();
 
