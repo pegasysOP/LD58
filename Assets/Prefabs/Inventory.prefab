@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   range: 5
-  ignoreAngleRange: 0.8
+  ignoreAngleRange: 0.6
   maxAngle: 90
   metalDetectionMask:
     serializedVersion: 2
