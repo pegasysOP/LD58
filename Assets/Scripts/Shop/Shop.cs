@@ -93,6 +93,10 @@ public class Shop : MonoBehaviour
                 GameManager.Instance.metalDetector.range *= 2;
                 Debug.Log("Range: " + GameManager.Instance.metalDetector.range);
                 break;
+            case Upgrade.Battery:
+                metalDetector.dischargeRate *= 0.85f;
+                metalDetector.RechargeBattery(metalDetector.maxBattery);
+                break;
             case Upgrade.Recharge:
                 metalDetector.RechargeBattery(50);
                 break;
