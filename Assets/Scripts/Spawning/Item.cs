@@ -10,6 +10,8 @@ public class Item : ScriptableObject
     public float rangeMultiplier = 1f;
     public int valueMin = 1;
     public int valueMax = 1;
+    public bool isSilver;
+    public bool isGold;
 
     public int GetValue()
     {
