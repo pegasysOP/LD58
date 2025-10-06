@@ -7,6 +7,9 @@ public class Spawner : MonoBehaviour
     public LayerMask groundLayer;
     public int maxItems = 5;
 
+    public bool canSpawnSilver = false;
+    public bool canSpawnGold = false;
+
     [Header("Items")]
     public List<Item> items = new List<Item>();
 
@@ -66,14 +69,31 @@ public class Spawner : MonoBehaviour
 
     private Item GetItemToSpawn()
     {
-        float totalWeight = 0f;
+        List<Item> validItems = new List<Item>();
         foreach (Item item in items)
+        {
+            if (item.isSilver && !canSpawnSilver)
+                continue;
+
+            if (item.isGold && !canSpawnGold)
+                continue;
+
+            validItems.Add(item);
+        }
+
+        if (validItems.Count == 0)
+            return null;
+
+        float totalWeight = 0f;
+        foreach (Item item in validItems)
+        {
             totalWeight += 1f / item.rarity;
+        }
 
         float randomPoint = Random.Range(0f, totalWeight);
-
         float currentWeight = 0f;
-        foreach (Item item in items)
+
+        foreach (Item item in validItems)
         {
             currentWeight += 1f / item.rarity;
             if (randomPoint <= currentWeight)
@@ -81,10 +101,10 @@ public class Spawner : MonoBehaviour
         }
 
         // fallback
-        return items[0];
+        return validItems[0];
     }
 
-    private void ResetSpawns()
+    public void ResetSpawns()
     {
         foreach (ItemObject spawnedItem in spawnedItems)
             Destroy(spawnedItem);
