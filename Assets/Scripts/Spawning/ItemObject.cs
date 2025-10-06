@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class ItemObject : MonoBehaviour, IInteractable
 {
+    public Collider col;
     public int digTimes = 3;
 
     private MeshRenderer mesh;

@@ -40,7 +40,10 @@ public class Inventory : MonoBehaviour
         float gains = 0f;
 
         foreach (ItemData item in items)
+        {
             gains += item.Value;
+            GameManager.Instance.itemCollection.AddItem(item);
+        }
         items.Clear();
 
         money += gains;
