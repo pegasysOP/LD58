@@ -36,10 +36,11 @@ public class PauseMenu : MonoBehaviour
     {
         bool pausing = !isActiveAndEnabled;
 
-        Cursor.visible = pausing;
-        Cursor.lockState = pausing ? CursorLockMode.None : CursorLockMode.Locked;
+        //Cursor.visible = pausing;
+        //Cursor.lockState = pausing ? CursorLockMode.None : CursorLockMode.Locked;
 
-        GameManager.Instance.SetLocked(pausing);
+        if (!GameManager.Instance.hudController.shopPanel.isActiveAndEnabled)
+            GameManager.Instance.SetLocked(pausing);
 
         gameObject.SetActive(pausing);
     }
