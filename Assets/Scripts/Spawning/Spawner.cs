@@ -107,7 +107,7 @@ public class Spawner : MonoBehaviour
     public void ResetSpawns()
     {
         foreach (ItemObject spawnedItem in spawnedItems)
-            Destroy(spawnedItem);
+            Destroy(spawnedItem.gameObject);
 
         spawnedItems.Clear();
 
