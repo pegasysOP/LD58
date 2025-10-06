@@ -35,7 +35,7 @@ public class Radio : MonoBehaviour
         }
         GameManager.Instance.hudController.ShowRadioPrompt(true);
         
-        if (keyboard.mKey.wasPressedThisFrame)
+        if (keyboard.eKey.wasPressedThisFrame)
         {
             currentSongIndex = (currentSongIndex + 1) % playlist.Count;
             AudioManager.Instance.PlayMusic(playlist[currentSongIndex], AudioManager.FadeType.FadeIn, 5f);

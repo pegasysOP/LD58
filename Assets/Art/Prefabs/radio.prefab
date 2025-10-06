@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Radio
   radioMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 16384
   range: 3
 --- !u!1001 &706613287335079607
 PrefabInstance:
