@@ -1676,6 +1676,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3143249884659094751, guid: 0a63e4787d92f4542905c9e5dd5e1d3e, type: 3}
   m_PrefabInstance: {fileID: 1343568710}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1354200572 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1093565102458389608, guid: fd7b04d50cc5d9842bb77ce3ff67b8f8, type: 3}
+  m_PrefabInstance: {fileID: 1609370226}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1359777511
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1765,6 +1770,68 @@ MonoBehaviour:
 Transform:
   m_CorrespondingSourceObject: {fileID: 8535457319218612281, guid: fd7b04d50cc5d9842bb77ce3ff67b8f8, type: 3}
   m_PrefabInstance: {fileID: 1609370226}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1442267783
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 2001940427}
+    m_Modifications:
+    - target: {fileID: 7152521350236489347, guid: 50801cbf920635548a917bdf7d679b3b, type: 3}
+      propertyPath: m_Name
+      value: ShovelHand
+      objectReference: {fileID: 0}
+    - target: {fileID: 7496537250198330425, guid: 50801cbf920635548a917bdf7d679b3b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7496537250198330425, guid: 50801cbf920635548a917bdf7d679b3b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7496537250198330425, guid: 50801cbf920635548a917bdf7d679b3b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7496537250198330425, guid: 50801cbf920635548a917bdf7d679b3b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7496537250198330425, guid: 50801cbf920635548a917bdf7d679b3b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7496537250198330425, guid: 50801cbf920635548a917bdf7d679b3b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7496537250198330425, guid: 50801cbf920635548a917bdf7d679b3b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7496537250198330425, guid: 50801cbf920635548a917bdf7d679b3b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 7496537250198330425, guid: 50801cbf920635548a917bdf7d679b3b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 7496537250198330425, guid: 50801cbf920635548a917bdf7d679b3b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -90
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 50801cbf920635548a917bdf7d679b3b, type: 3}
+--- !u!4 &1442267784 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7496537250198330425, guid: 50801cbf920635548a917bdf7d679b3b, type: 3}
+  m_PrefabInstance: {fileID: 1442267783}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1469442218
 PrefabInstance:
@@ -2061,7 +2128,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 1093565102458389608, guid: fd7b04d50cc5d9842bb77ce3ff67b8f8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2001940427}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fd7b04d50cc5d9842bb77ce3ff67b8f8, type: 3}
 --- !u!1001 &1611992631
@@ -2675,6 +2745,38 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2001940426
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2001940427}
+  m_Layer: 0
+  m_Name: ShovelHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2001940427
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2001940426}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.63361645, y: -0.77356875, z: -0.0034485701, w: -0.010470609}
+  m_LocalPosition: {x: -0.6527564, y: -0.08196225, z: -0.008256578}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1442267784}
+  m_Father: {fileID: 1354200572}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: -90}
 --- !u!1 &2064874811
 GameObject:
   m_ObjectHideFlags: 0
