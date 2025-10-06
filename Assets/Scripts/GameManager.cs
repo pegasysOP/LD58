@@ -76,4 +76,16 @@ public class GameManager : MonoBehaviour
         Cursor.visible = locked;
         Cursor.lockState = locked ? CursorLockMode.None : CursorLockMode.Locked;
     }
+
+    public void RemoveUpgrade(Upgrade upgradeType)
+    {
+        for (int i = 0; i < upgrades.Count; i++)
+        {
+            if (upgrades[i].upgrade == upgradeType)
+            {
+                upgrades.RemoveAt(i);
+                return;
+            }
+        }
+    }
 }

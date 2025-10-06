@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -55,14 +55,25 @@ public class Shop : MonoBehaviour
 
         GameManager.Instance.inventory.DeductMoney(upgradeData.cost);
 
-        for (int i = 0; i < GameManager.Instance.upgrades.Count; i++)
+        switch (upgradeData.upgrade)
         {
-            if (GameManager.Instance.upgrades[i].upgrade == upgradeData.upgrade)
-            {
-                UpgradeData temp = GameManager.Instance.upgrades[i];
-                temp.cost *= 1.5f; // increase for next time
-                GameManager.Instance.upgrades[i] = temp;
-            }
+            case Upgrade.SilverDetector:
+            case Upgrade.GoldDetector:
+                GameManager.Instance.RemoveUpgrade(upgradeData.upgrade);
+                break;
+
+            default:
+                for (int i = 0; i < GameManager.Instance.upgrades.Count; i++)
+                {
+                    if (GameManager.Instance.upgrades[i].upgrade == upgradeData.upgrade)
+                    {
+                        UpgradeData temp = GameManager.Instance.upgrades[i];
+                        temp.cost *= 1.5f; // increase for next time
+                        GameManager.Instance.upgrades[i] = temp;
+                        break;
+                    }
+                }
+                break;
         }
 
         ApplyUpgrade(upgradeData.upgrade);  
