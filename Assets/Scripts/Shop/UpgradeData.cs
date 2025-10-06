@@ -5,6 +5,7 @@ public enum Upgrade
     Backpack,
     WalletSize,
     Rarity,
+    SilverDetector,
     GoldDetector,
     HeartbeatSensor,
     Fossils,
