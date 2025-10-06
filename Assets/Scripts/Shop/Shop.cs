@@ -98,7 +98,7 @@ public class Shop : MonoBehaviour
                 metalDetector.RechargeBattery(metalDetector.maxBattery);
                 break;
             case Upgrade.Recharge:
-                metalDetector.RechargeBattery(50);
+                metalDetector.RechargeBattery(metalDetector.maxBattery);
                 break;
 
             case Upgrade.Backpack:
