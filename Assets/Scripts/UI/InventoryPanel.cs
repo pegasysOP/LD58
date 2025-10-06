@@ -22,11 +22,14 @@ public class InventoryPanel : MonoBehaviour
         }
     }
 
-    public void SetFilledSlots(int amount)
+    public void SetFilledSlots(List<Sprite> itemSprites)
     {
         for (int i = 0; i < slots.Count; i++)
         {
-            slots[i].SetFilled(i < amount);
+            if (i >= itemSprites.Count)
+                slots[i].SetFilled(null);
+            else
+                slots[i].SetFilled(itemSprites[i]);
         }
     }
 }

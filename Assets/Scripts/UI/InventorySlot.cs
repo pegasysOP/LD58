@@ -1,11 +1,14 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventorySlot : MonoBehaviour
 {
-    public GameObject filledIcon;
+    public Image filledIcon;
 
-    public void SetFilled(bool filled)
+    public void SetFilled(Sprite itemSprite)
     {
-        filledIcon.SetActive(filled);
+        filledIcon.gameObject.SetActive(itemSprite != null);
+        if (itemSprite != null)
+            filledIcon.sprite = itemSprite;
     }
 }

@@ -19,6 +19,7 @@ public class ItemObject : MonoBehaviour, IInteractable
         this.itemData.Name = itemInfo.displayName;
         this.itemData.Description = itemInfo.description;
         this.itemData.Value = itemInfo.GetValue();
+        this.itemData.Sprite = itemInfo.icon;
         this.rangeMultiplier = itemInfo.rangeMultiplier;
 
         this.onDestroy = onDestroy;

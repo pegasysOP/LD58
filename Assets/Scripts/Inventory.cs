@@ -90,4 +90,12 @@ public class Inventory : MonoBehaviour
     {
         return items.Count >= maxSize;
     }
+
+    public List<Sprite> GetInventorySprites()
+    {
+        List<Sprite> sprites = new List<Sprite>();
+        foreach (ItemData item in items)
+            sprites.Add(item.Sprite);
+        return sprites;
+    }
 }

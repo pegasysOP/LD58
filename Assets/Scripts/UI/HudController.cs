@@ -32,7 +32,7 @@ public class HudController : MonoBehaviour
     public void UpdateInventory()
     {
         inventoryPanel.SetInventorySize(GameManager.Instance.inventory.maxSize);
-        inventoryPanel.SetFilledSlots(GameManager.Instance.inventory.GetCurrentSize());
+        inventoryPanel.SetFilledSlots(GameManager.Instance.inventory.GetInventorySprites());
     }
 
     public void ShowShop(Shop shop)
