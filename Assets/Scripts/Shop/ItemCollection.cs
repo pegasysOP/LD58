@@ -26,6 +26,8 @@ public class ItemCollection : MonoBehaviour
                 ItemObject itemObject = Instantiate(item.objectPrefab, collectionSpawnPoints[currentIndex].spawnPoint.transform.position, Quaternion.identity);
                 itemObject.col.enabled = false; // don't steal please
                 itemObject.transform.parent = transform;
+
+                items.Remove(item); // only one of each
                 currentIndex++;
 
                 break;
