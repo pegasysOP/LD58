@@ -54,7 +54,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4096
   maxBattery: 100
-  dischargeRate: 3
+  dischargeRate: 2
   rechargeRate: 0
   metalDetectorBeep: {fileID: 8300000, guid: 72d60790c61e7496fa484b2682840ae9, type: 3}
   minPitch: 0.6

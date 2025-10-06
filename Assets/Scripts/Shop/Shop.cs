@@ -91,11 +91,11 @@ public class Shop : MonoBehaviour
         switch (upgrade)
         {
             case Upgrade.Range:
-                GameManager.Instance.metalDetector.range *= 2;
+                GameManager.Instance.metalDetector.range += 2;
                 Debug.Log("Range: " + GameManager.Instance.metalDetector.range);
                 break;
             case Upgrade.Battery:
-                metalDetector.dischargeRate *= 0.75f;
+                metalDetector.maxBattery += 50f;
                 metalDetector.RechargeBattery(metalDetector.maxBattery);
                 break;
             case Upgrade.Recharge:
