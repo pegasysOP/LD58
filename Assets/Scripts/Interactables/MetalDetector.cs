@@ -14,6 +14,7 @@ public class MetalDetector : MonoBehaviour
     [Header("Battery Settings")]
     public float maxBattery = 100f;
     public float dischargeRate = 0f;
+    public float rechargeRate = 0f;
     private float battery;
 
     [Header("Audio Settings")]
@@ -52,6 +53,7 @@ public class MetalDetector : MonoBehaviour
         {
             beepTimer = 0f;
             audioSource.Stop();
+            RechargeBatteryOverTime();
         }
     }
 
@@ -148,6 +150,17 @@ public class MetalDetector : MonoBehaviour
         if (battery <= 0f)
         {
             battery = 0f;
+            return;
+        }
+    }
+
+    public void RechargeBatteryOverTime()
+    {
+        battery += rechargeRate * Time.deltaTime;
+        GameManager.Instance.hudController.UpdateBatteryText(battery);
+        if (battery >= maxBattery)
+        {
+            battery = maxBattery;
             return;
         }
     }

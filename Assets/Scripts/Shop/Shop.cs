@@ -128,9 +128,6 @@ public class Shop : MonoBehaviour
                     }
                 }
                 break;
-
-
-
             case Upgrade.GoldDetector:
                 foreach(Spawner spawner in spawners)
                 {
@@ -151,14 +148,15 @@ public class Shop : MonoBehaviour
             case Upgrade.AlienTech:
                 Debug.LogError("Upgrade " + upgrade.ToString() + " is not yet implemented");
                 break;
-
+            case Upgrade.SolarPanel:
+                metalDetector.rechargeRate = 1f;
+                break;
             case Upgrade.SilverDetector:
                 foreach(Spawner spawner in spawners)
                 {
                     spawner.canSpawnSilver = true;
                     spawner.ResetSpawns();
                 }
-                
                 break;
 
             default:

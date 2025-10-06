@@ -6,6 +6,7 @@ public enum Upgrade
     WalletSize,
     Rarity,
     Recharge,
+    SolarPanel,
     SilverDetector,
     GoldDetector,
     HeartbeatSensor,
