@@ -1195,7 +1195,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5436102082660218082, guid: 7071210b99b3bc14c918a1782f63a0a1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1343568711}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4579083236923618607, guid: 7071210b99b3bc14c918a1782f63a0a1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1569587956}
   m_SourcePrefab: {fileID: 100100000, guid: 7071210b99b3bc14c918a1782f63a0a1, type: 3}
 --- !u!4 &430636515 stripped
 Transform:
@@ -3130,6 +3133,32 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 322362339027973043, guid: dc5d9a6cfc944eb499845bb8f352bf53, type: 3}
   m_PrefabInstance: {fileID: 1540351624}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1569587952 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4579083236923618607, guid: 7071210b99b3bc14c918a1782f63a0a1, type: 3}
+  m_PrefabInstance: {fileID: 430636514}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1569587956
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1569587952}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.1175495, y: 1.5350099, z: 0.8321393}
+  m_Center: {x: 0.0000038146973, y: -0.000000029802322, z: 0.0000023841858}
 --- !u!1001 &1572487033
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4028,7 +4057,7 @@ Transform:
   m_GameObject: {fileID: 2001940426}
   serializedVersion: 2
   m_LocalRotation: {x: -0.63361645, y: -0.77356875, z: -0.0034485701, w: -0.010470609}
-  m_LocalPosition: {x: -0.6527564, y: -0.08196225, z: -0.008256578}
+  m_LocalPosition: {x: -0.606, y: -0.073, z: -0.007}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
