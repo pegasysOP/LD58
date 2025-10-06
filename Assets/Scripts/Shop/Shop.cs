@@ -10,6 +10,7 @@ public class Shop : MonoBehaviour
 
     private Keyboard keyboard;
     public List<Spawner> spawners;
+    public MetalDetector metalDetector;
 
     private void Start()
     {
@@ -41,6 +42,7 @@ public class Shop : MonoBehaviour
     private void OpenShop()
     {
         GameManager.Instance.hudController.ShowShop(this);
+        metalDetector = FindFirstObjectByType<MetalDetector>();
     }
 
     public float SellItems()
@@ -60,6 +62,10 @@ public class Shop : MonoBehaviour
             case Upgrade.SilverDetector:
             case Upgrade.GoldDetector:
                 GameManager.Instance.RemoveUpgrade(upgradeData.upgrade);
+                break;
+
+            case Upgrade.Recharge:
+                //Do nothing. Just don't call default
                 break;
 
             default:
@@ -86,6 +92,9 @@ public class Shop : MonoBehaviour
             case Upgrade.Range:
                 GameManager.Instance.metalDetector.range *= 2;
                 Debug.Log("Range: " + GameManager.Instance.metalDetector.range);
+                break;
+            case Upgrade.Recharge:
+                metalDetector.RechargeBattery(50);
                 break;
 
             case Upgrade.Backpack:

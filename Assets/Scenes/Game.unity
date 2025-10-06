@@ -4050,7 +4050,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1782707436106725030, guid: fd7b04d50cc5d9842bb77ce3ff67b8f8, type: 3}
       propertyPath: dischargeRate
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6157617304416577436, guid: fd7b04d50cc5d9842bb77ce3ff67b8f8, type: 3}
       propertyPath: m_Enabled
@@ -5144,13 +5144,13 @@ PrefabInstance:
       value: Game Manager
       objectReference: {fileID: 0}
     - target: {fileID: 8604299526140403365, guid: 2588910add1eda14fb3990c1ee7ff1aa, type: 3}
-      propertyPath: pauseMenu
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8604299526140403365, guid: 2588910add1eda14fb3990c1ee7ff1aa, type: 3}
       propertyPath: hudController
       value: 
       objectReference: {fileID: 2130266714}
+    - target: {fileID: 8604299526140403365, guid: 2588910add1eda14fb3990c1ee7ff1aa, type: 3}
+      propertyPath: metalDetector
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

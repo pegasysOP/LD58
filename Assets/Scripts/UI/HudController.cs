@@ -20,7 +20,11 @@ public class HudController : MonoBehaviour
 
     public void UpdateBatteryText(float battery)
     {
-        
+        if(battery < 0)
+        {
+            battery = 0;
+        }
+
         batteryText.text = battery.ToString("F2");
     }
 

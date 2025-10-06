@@ -59,6 +59,11 @@ public class MetalDetector : MonoBehaviour
     {
         DischargeBattery();
 
+        if(battery <= 0f)
+        {
+            return;
+        }
+
         // don't detect if looking above horizontal
         if (Camera.main.transform.forward.y > 0)
         {
@@ -145,5 +150,18 @@ public class MetalDetector : MonoBehaviour
             battery = 0f;
             return;
         }
+    }
+
+    public void RechargeBattery(float amount)
+    {
+        battery += amount;
+        
+        if(battery >= maxBattery)
+        {
+            battery = maxBattery;
+
+        }
+
+        GameManager.Instance.hudController.UpdateBatteryText(battery);
     }
 }
