@@ -9,12 +9,11 @@ public class Shop : MonoBehaviour
     public float range = 3f;
 
     private Keyboard keyboard;
-    private Spawner spawner;
+    public List<Spawner> spawners;
 
     private void Start()
     {
         keyboard = Keyboard.current;
-        spawner = FindFirstObjectByType<Spawner>();
     }
 
     // Update is called once per frame
@@ -89,23 +88,32 @@ public class Shop : MonoBehaviour
                 break;
 
             case Upgrade.Rarity:
-                foreach(Item item in spawner.items)
+                foreach(Spawner spawner in spawners)
                 {
-                    //TODO: We probably want to do this in a better way
-                    if(item.rarity == 1)
+                    foreach(Item item in spawner.items)
                     {
-                        item.rarity *= 2;
-                    }
-                    else
-                    {
-                        item.rarity /= 2;
+                        //TODO: We probably want to do this in a better way
+                        if(item.rarity == 1)
+                        {
+                            item.rarity *= 2;
+                        }
+                        else
+                        {
+                            item.rarity /= 2;
+                        }
                     }
                 }
                 break;
 
+
+
             case Upgrade.GoldDetector:
-                spawner.canSpawnGold = true;
-                spawner.ResetSpawns();
+                foreach(Spawner spawner in spawners)
+                {
+                    spawner.canSpawnGold = true;
+                    spawner.ResetSpawns();
+                }
+                
                 break;
 
             case Upgrade.HeartbeatSensor:
@@ -121,8 +129,12 @@ public class Shop : MonoBehaviour
                 break;
 
             case Upgrade.SilverDetector:
-                spawner.canSpawnSilver = true;
-                spawner.ResetSpawns();
+                foreach(Spawner spawner in spawners)
+                {
+                    spawner.canSpawnSilver = true;
+                    spawner.ResetSpawns();
+                }
+                
                 break;
 
             default:
