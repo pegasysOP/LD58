@@ -27,6 +27,12 @@ public class Radio : MonoBehaviour
             AudioManager.Instance.PlayMusic(playlist[currentSongIndex], AudioManager.FadeType.FadeIn, 1f);
         }
 
+        if (!AudioManager.Instance.musicSource.isPlaying)
+        {
+            currentSongIndex = (currentSongIndex + 1) % playlist.Count;
+            AudioManager.Instance.PlayMusic(playlist[currentSongIndex], AudioManager.FadeType.FadeIn, 5f);
+        }
+
         Physics.Raycast(GameManager.Instance.cameraController.playerCamera.transform.position, GameManager.Instance.cameraController.playerCamera.transform.forward, out RaycastHit hitInfo, range, radioMask);
         if (hitInfo.collider == null)
         {
