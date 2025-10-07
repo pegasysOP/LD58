@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
+    [Header("Internals")]
     public AudioSource musicSource;
     public AudioSource sfxSource;
     public AudioSource fadeSource;
+    private Coroutine currentCoroutine;
 
     [Header("UI")]
     public AudioClip buttonPressClip;
@@ -39,8 +41,6 @@ public class AudioManager : MonoBehaviour
     private int playlistIndex = 0;
 
     public static AudioManager Instance;
-
-    private Coroutine currentCoroutine;
 
     private float remainingDuckTime = 0f;
 
