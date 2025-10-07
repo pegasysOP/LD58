@@ -153,12 +153,12 @@ public class MetalDetector : MonoBehaviour
     private void DischargeBattery()
     {
         battery -= dischargeRate * Time.deltaTime;
+        GameManager.Instance.hudController.UpdateBatteryText(battery);
         if (battery <= 0f)
         {
             battery = 0f;
             return;
         }
-        GameManager.Instance.hudController.UpdateBatteryText(battery);
     }
 
     public void RechargeBatteryOverTime()
