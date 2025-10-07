@@ -164,12 +164,13 @@ public class MetalDetector : MonoBehaviour
     public void RechargeBatteryOverTime()
     {
         battery += rechargeRate * Time.deltaTime;
-        GameManager.Instance.hudController.UpdateBatteryText(battery);
+
         if (battery >= maxBattery)
         {
             battery = maxBattery;
-            return;
         }
+
+        GameManager.Instance.hudController.UpdateBatteryText(battery);
     }
 
     public void RechargeBattery(float amount)
