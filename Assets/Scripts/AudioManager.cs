@@ -34,6 +34,10 @@ public class AudioManager : MonoBehaviour
     public AudioClip jazzSongClip;
     public AudioClip americanaSongClip;
 
+    [Header("Playlist")]
+    private List<AudioClip> playlist;
+    private int playlistIndex = 0;
+
     public static AudioManager Instance;
 
     private Coroutine currentCoroutine;
@@ -52,8 +56,16 @@ public class AudioManager : MonoBehaviour
         UpdateVolume(SettingsUtils.GetMasterVolume());
         Play(sfxSource, waveClip);
 
-        AudioClip[] clipsToWarm = { hawiiSongClip, jazzSongClip, americanaSongClip };
-        foreach (AudioClip clip in clipsToWarm)
+        CreatePlaylist();
+
+        WarmMusicCache();
+
+        PlayCurrentSongInPlaylist();
+    }
+
+    void WarmMusicCache()
+    {
+        foreach (AudioClip clip in playlist)
         {
             if (clip != null && musicSource != null)
             {
@@ -62,6 +74,55 @@ public class AudioManager : MonoBehaviour
                 musicSource.Stop();
             }
         }
+    }
+
+    //==================== Playlist ===================
+    
+    void CreatePlaylist()
+    {
+        playlist = new List<AudioClip>()
+        {
+            hawiiSongClip,
+            jazzSongClip,
+            americanaSongClip
+        };
+    }
+
+    void AdvanceSong()
+    {
+        playlistIndex = (playlistIndex + 1) % playlist.Count;
+        PlayCurrentSongInPlaylist();
+    }
+
+    void Shuffle()
+    {
+        int tempPlaylistIndex = playlistIndex;
+        while(tempPlaylistIndex == playlistIndex)
+        {
+            tempPlaylistIndex = Random.Range(0, playlist.Count);
+        }
+        playlistIndex = tempPlaylistIndex;
+        AudioManager.Instance.PlayMusic(playlist[playlistIndex], AudioManager.FadeType.FadeIn, 1f);
+    }
+
+    void PlayCurrentSongInPlaylist()
+    {
+        AudioManager.Instance.PlayMusic(playlist[playlistIndex], AudioManager.FadeType.FadeIn, 1f);
+    }
+
+    void StopPlaylist()
+    {
+        AudioManager.Instance.Stop(musicSource, true);
+    }
+
+    void PausePlaylist()
+    {
+        AudioManager.Instance.musicSource.Pause();
+    }
+
+    void UnpausePlaylist()
+    {
+        AudioManager.Instance.musicSource.UnPause();
     }
 
     //==================== Utility ====================
@@ -117,6 +178,11 @@ public class AudioManager : MonoBehaviour
         {
             PlaySeagullClip();
             seagullTimer = Random.Range(seagullDelay, seagullDelay * 2f);
+        }
+
+        if (!musicSource.isPlaying)
+        {
+            AdvanceSong();
         }
     }
 
