@@ -7,6 +7,7 @@ public class AudioManager : MonoBehaviour
     public AudioSource musicSource;
     public AudioSource sfxSource;
     public AudioSource fadeSource;
+    public AudioSource metalDetectorSource;
 
     [Header("UI")]
     public AudioClip buttonPressClip;
@@ -161,6 +162,7 @@ public class AudioManager : MonoBehaviour
         musicSource.volume = value / 3;
         fadeSource.volume = value / 3;
         sfxSource.volume = value / 3;
+        metalDetectorSource.volume = value;
     }
 
     public void UpdateSfxVolume(float value)
